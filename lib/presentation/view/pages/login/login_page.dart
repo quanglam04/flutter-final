@@ -2,10 +2,10 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_clean_architecture/gen/assets.gen.dart';
+import 'package:flutter_clean_architecture/presentation/router/router.dart';
 import 'package:flutter_clean_architecture/presentation/view/widgets/app_button.dart';
 import 'package:flutter_clean_architecture/presentation/view/widgets/app_form_field.dart';
 import 'package:flutter_clean_architecture/shared/extension/context.dart';
-import 'package:flutter_svg/svg.dart';
 
 import '../../../base/base_page.dart';
 import 'login_bloc.dart';
@@ -67,9 +67,7 @@ class LoginPage extends BasePage<LoginBloc, LoginEvent, LoginState> {
               ],
             ),
             const SizedBox(height: 4),
-            AppFormField(
-
-            ),
+            AppFormField(),
             const SizedBox(height: 16),
             Row(
               children: [
@@ -88,8 +86,13 @@ class LoginPage extends BasePage<LoginBloc, LoginEvent, LoginState> {
               ],
             ),
             const SizedBox(height: 4),
-            const AppFormField(),
-            SizedBox(height: 8),
+            AppFormField(
+              obscureText: true,
+              decoration: InputDecoration(
+                suffixIcon: Padding(padding: EdgeInsets.only(right: 10),child: Icon(Icons.visibility_off, color: colorSchema?.grayscaleBodyText),),
+              ),
+            ),
+            const SizedBox(height: 8),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -130,7 +133,9 @@ class LoginPage extends BasePage<LoginBloc, LoginEvent, LoginState> {
               backgroundColor: colorSchema?.primaryDefault,
               title: 'Login',
               titleStyle: textTheme?.textMedium,
-              onPressed: () {},
+              onPressed: () {
+                context.router.replace(HomeRoute());
+              },
             ),
             SizedBox(height: 16),
             Align(
@@ -168,11 +173,7 @@ class LoginPage extends BasePage<LoginBloc, LoginEvent, LoginState> {
                       color: colorSchema?.grayscaleBodyText,
                     ),
                     onPressed: () {},
-                    icon: SvgPicture.asset(
-                      "assets/icons/google.svg",
-                      width: 24,
-                      height: 24,
-                    ),
+                    icon: Assets.icons.google.svg(),
                   ),
                 ),
               ],

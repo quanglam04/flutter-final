@@ -10,7 +10,7 @@ const kDefaultPaddingLabelTabBar = 8.0;
 
 abstract class AppTheme {
   static final InputBorder _defaultOutlineInputBorder = OutlineInputBorder(
-    borderSide: const BorderSide(color: AppColors.pattensBlue, width: 1),
+    borderSide: const BorderSide(color: AppColors.grayscaleBodyText, width: 1),
     borderRadius: BorderRadius.circular(6),
   );
 
@@ -55,7 +55,7 @@ abstract class AppTheme {
         suffixIconColor: AppColors.atlantis,
         prefixIconColor: AppColors.atlantis,
         contentPadding:
-            const EdgeInsets.symmetric(horizontal: 16, vertical: 11),
+            const EdgeInsets.only(right: 16,left: 16, top: 18,  bottom: 18),
         isDense: true,
         filled: true,
       ),
