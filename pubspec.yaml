@@ -1,0 +1,120 @@
+name: flutter_clean_architecture
+description: "A new Flutter project."
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.7.2
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # Router
+  auto_route: ^10.0.1
+
+  # State management
+  flutter_bloc: ^9.1.0
+
+  # Generator for unions/pattern-matching/copy
+  freezed: ^3.0.4
+  equatable: ^2.0.7
+
+  # DIP
+  get_it: ^8.0.3
+  injectable: ^2.5.0
+
+  # Logger
+  logger: ^2.5.0
+  pretty_dio_logger: ^1.4.0
+
+  # Localization
+  easy_localization: ^3.0.7+1
+
+  # Network
+  dio: ^5.8.0+1
+  retrofit: ^4.4.2
+  json_annotation: ^4.9.0
+  dio_cookie_manager: ^3.2.0
+  cookie_jar: ^4.0.8
+  path_provider: ^2.1.5
+  dio_smart_retry: ^7.0.1
+
+  # Local data
+  shared_preferences: ^2.5.2
+  flutter_secure_storage: ^9.2.4
+
+  # Alert
+  cool_alert: ^2.0.1
+
+  # Resource
+  flutter_gen_runner: ^5.10.0
+  flutter_svg: ^2.0.17
+  one_context: ^4.1.0
+
+  # UI
+  dropdown_button2: ^2.3.9
+  card_loading: ^0.3.2
+  focus_detector: ^2.0.1
+
+  # Testing
+  mockito: ^5.4.5
+
+  # Utils
+  uuid: ^4.5.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^5.0.0
+
+  # Generating files
+  build_runner: ^2.4.15
+  injectable_generator: ^2.7.0
+  json_serializable: ^6.9.4
+
+  # Router
+  auto_route_generator: ^10.0.1
+
+  # Network
+  retrofit_generator: ^9.1.9
+
+flutter_gen:
+  line_length: 80
+  integrations:
+    flutter_svg: true
+
+dependency_overrides:
+  flare_flutter:
+    git:
+      url: https://github.com/mbfakourii/Flare-Flutter.git
+      path: flare_flutter
+      ref: remove_hashValues
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/translations/
+    - assets/fonts/
+    - assets/icons/
+    - assets/images/
+  fonts:
+    - family: Poppins
+      fonts:
+        - asset: assets/fonts/Poppins-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Poppins-BoldItalic.ttf
+          weight: 700
+          style: italic
+        - asset: assets/fonts/Poppins-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Poppins-Italic.ttf
+          weight: 400
+          style: italic
+        - asset: assets/fonts/Poppins-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Poppins-MediumItalic.ttf
+          weight: 500
+          style: italic
