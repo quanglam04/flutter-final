@@ -20,13 +20,10 @@ class LoginPage extends BasePage<LoginBloc, LoginEvent, LoginState> {
     super.onInitState(context);
   }
 
-
-
   @override
   Widget builder(BuildContext context) {
-    final textTheme = context.themeOwn().textTheme?.textDisplayLargeBold;
+    final textTheme = context.themeOwn().textTheme;
     final colorSchema = context.themeOwn().colorSchema;
-
 
     return Padding(
       padding: const EdgeInsets.only(top: 44, left: 24, right: 24, bottom: 8),
@@ -36,25 +33,20 @@ class LoginPage extends BasePage<LoginBloc, LoginEvent, LoginState> {
           children: [
             Text(
               'HELLO',
-              style: textTheme?.copyWith(
-                  color: colorSchema?.grayscaleBodyText,
+              style: textTheme?.textDisplayLargeBold?.copyWith(
+                color: colorSchema?.grayscaleTitleactive,
               ),
             ),
             Text(
               'AGAIN',
-              style: TextStyle(
-                fontSize: 48,
-                fontWeight: FontWeight.bold,
-                height: 72 / 48,
-                color: Color(0xff1877F2),
+              style: textTheme?.textDisplayLargeBold?.copyWith(
+                color: colorSchema?.primaryDefault,
               ),
             ),
             Text(
               'Welcome back you’ve \nbeen missed',
-              style: TextStyle(
-                fontSize: 20,
-                height: 1.5,
-                color: Color(0xFF4E4B66),
+              style: textTheme?.textLarge?.copyWith(
+                color: colorSchema?.grayscaleBodyText,
               ),
             ),
             const SizedBox(height: 52),
@@ -62,43 +54,35 @@ class LoginPage extends BasePage<LoginBloc, LoginEvent, LoginState> {
               children: [
                 Text(
                   'Username',
-                  style: context.themeOwn().textTheme?.textSmall,
+                  style: textTheme?.textSmall?.copyWith(
+                    color: colorSchema?.grayscaleBodyText,
+                  ),
                 ),
                 Text(
                   '*',
-                  style: TextStyle(
-                    fontSize: 14,
-                    height: 21 / 14,
-                    color: Color(0xFFC30052),
+                  style: textTheme?.textSmall?.copyWith(
+                    color: colorSchema?.errorDark,
                   ),
                 ),
               ],
             ),
             const SizedBox(height: 4),
             AppFormField(
-              decoration: InputDecoration(
-                border: OutlineInputBorder(
-                  borderSide: BorderSide(width: 1, color: Colors.black),
-                ),
-              ),
+
             ),
             const SizedBox(height: 16),
-            const Row(
+            Row(
               children: [
                 Text(
                   'Password',
-                  style: TextStyle(
-                    fontSize: 14,
-                    height: 21 / 14,
-                    color: Color(0xFF4E4B66),
+                  style: textTheme?.textSmall?.copyWith(
+                    color: colorSchema?.grayscaleBodyText,
                   ),
                 ),
                 Text(
                   '*',
-                  style: TextStyle(
-                    fontSize: 14,
-                    height: 21 / 14,
-                    color: Color(0xFFC30052),
+                  style: textTheme?.textSmall?.copyWith(
+                    color: colorSchema?.errorDark,
                   ),
                 ),
               ],
@@ -117,17 +101,15 @@ class LoginPage extends BasePage<LoginBloc, LoginEvent, LoginState> {
                       height: 24,
                       child: Checkbox(
                         value: true,
-                        activeColor: Color(0xFF1877F2),
+                        activeColor: colorSchema?.primaryDefault,
                         onChanged: (x) {},
                       ),
                     ),
                     const SizedBox(width: 1.5),
-                    const Text(
+                    Text(
                       'Remember me',
-                      style: TextStyle(
-                        fontSize: 14,
-                        height: 21 / 14,
-                        color: Color(0xFF4E4B66),
+                      style: textTheme?.textSmall?.copyWith(
+                        color: colorSchema?.grayscaleBodyText,
                       ),
                     ),
                   ],
@@ -143,22 +125,21 @@ class LoginPage extends BasePage<LoginBloc, LoginEvent, LoginState> {
               ],
             ),
             SizedBox(height: 16),
-            Container(
+            AppButton.primary(
               height: 50,
-              child: AppButton.primary(
-                backgroundColor: Color(0xFF1877F2),
-                title: 'Login',
-                titleStyle: TextStyle(fontSize: 16),
-                onPressed: () {},
-              ),
+              backgroundColor: colorSchema?.primaryDefault,
+              title: 'Login',
+              titleStyle: textTheme?.textMedium,
+              onPressed: () {},
             ),
             SizedBox(height: 16),
-
             Align(
               alignment: Alignment.center,
-              child: const Text(
+              child: Text(
                 'or continue with',
-                style: TextStyle(color: Color(0xFF4E4B66)),
+                style: textTheme?.textSmall?.copyWith(
+                  color: colorSchema?.grayscaleBodyText,
+                ),
               ),
             ),
             SizedBox(height: 16),
@@ -169,11 +150,10 @@ class LoginPage extends BasePage<LoginBloc, LoginEvent, LoginState> {
                 Expanded(
                   child: AppButton.primary(
                     height: 48,
-                    backgroundColor: Color(0xFFEEF1F4),
+                    backgroundColor: colorSchema?.grayscaleSecondaryButton,
                     title: 'Facebook',
-                    titleStyle: TextStyle(
-                      color: Color(0xFF667080),
-                      fontSize: 16,
+                    titleStyle: textTheme?.textMediumLink?.copyWith(
+                      color: colorSchema?.grayscaleBodyText,
                     ),
                     onPressed: () {},
                     icon: Assets.icons.facebook.svg(),
@@ -182,11 +162,10 @@ class LoginPage extends BasePage<LoginBloc, LoginEvent, LoginState> {
                 const SizedBox(width: 31),
                 Expanded(
                   child: AppButton.primary(
-                    backgroundColor: Color(0xFFEEF1F4),
+                    backgroundColor: colorSchema?.grayscaleSecondaryButton,
                     title: 'Google',
-                    titleStyle: TextStyle(
-                      color: Color(0xFF667080),
-                      fontSize: 16,
+                    titleStyle: textTheme?.textMediumLink?.copyWith(
+                      color: colorSchema?.grayscaleBodyText,
                     ),
                     onPressed: () {},
                     icon: SvgPicture.asset(
@@ -199,19 +178,19 @@ class LoginPage extends BasePage<LoginBloc, LoginEvent, LoginState> {
               ],
             ),
             const SizedBox(height: 16),
-            const Row(
+            Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
                   'don\'t have an account ? ',
-                  style: TextStyle(height: 21 / 14, color: Color(0xFF4E4B66)),
+                  style: textTheme?.textSmall?.copyWith(
+                    color: colorSchema?.grayscaleBodyText,
+                  ),
                 ),
                 Text(
                   'Sign Up',
-                  style: TextStyle(
-                    color: Color(0xFF1877F2),
-                    fontWeight: FontWeight.bold,
-                    height: 21 / 14,
+                  style: textTheme?.textSmallLink?.copyWith(
+                    color: colorSchema?.primaryDefault,
                   ),
                 ),
               ],
