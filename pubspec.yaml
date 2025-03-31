@@ -97,6 +97,7 @@ dependency_overrides:
       path: flare_flutter
       ref: remove_hashValues
 
+
 flutter:
   uses-material-design: true
   assets:
