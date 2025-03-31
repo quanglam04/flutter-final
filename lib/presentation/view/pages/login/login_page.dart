@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_clean_architecture/gen/assets.gen.dart';
 import 'package:flutter_clean_architecture/presentation/router/router.dart';
-import 'package:flutter_clean_architecture/presentation/view/pages/login/home_after_login.dart';
 import 'package:flutter_clean_architecture/presentation/view/widgets/app_button.dart';
 import 'package:flutter_clean_architecture/presentation/view/widgets/app_form_field.dart';
 import 'package:flutter_clean_architecture/shared/extension/context.dart';
@@ -191,10 +190,7 @@ class LoginPage extends BasePage<LoginBloc, LoginEvent, LoginState> {
                           if (googleUser != null) {
                             logger.d("$googleUser");
                             logger.d("login successsssssssssssss");
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => home()),
-                            );
+                            context.pushRoute(HomeRoute());
                           } else {
                             print("login failed");
                           }

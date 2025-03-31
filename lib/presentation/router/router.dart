@@ -1,5 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 
+import '../view/pages/splash/splash_page.dart';
+
 import '../view/pages/hello/hello_page.dart';
 
 import '../view/pages/home/home_page.dart';
@@ -20,5 +22,6 @@ class AppRouter extends RootStackRouter {
     //AutoRoute(page: TaskDetailRoute.page),
     AutoRoute(page: LoginRoute.page, initial: true),
     AutoRoute(page: HelloRoute.page),
+    AutoRoute(page: SplashRoute.page),
   ];
 }
