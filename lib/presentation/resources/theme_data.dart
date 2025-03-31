@@ -93,6 +93,7 @@ class AppColorSchema {
     this.title2,
 
 
+    this.darkBlack,
     this.successDefault,
     this.successDark,
     this.successDarkmode,
@@ -135,6 +136,7 @@ class AppColorSchema {
 
   final Color? successDefault;
   final Color? successDark;
+  final Color? darkBlack;
   final Color? successDarkmode;
   final Color? successLight;
   final Color? errorDefault;

@@ -55,7 +55,7 @@ abstract class AppTheme {
         suffixIconColor: AppColors.atlantis,
         prefixIconColor: AppColors.atlantis,
         contentPadding:
-            const EdgeInsets.only(right: 16,left: 16, top: 18,  bottom: 18),
+            const EdgeInsets.only(right: 34,left: 34, top: 13.5,  bottom: 13.5),
         isDense: true,
         filled: true,
       ),
@@ -126,6 +126,7 @@ abstract class AppTheme {
             title2: AppColors.gray76,
 
             successDefault: AppColors.successDefault,
+            darkBlack: AppColors.darkBlack,
             successDark: AppColors.successDark,
             successDarkmode: AppColors.successDarkmode,
             successLight: AppColors.successLight,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 abstract class AppColors {
   static const Color successDefault = Color(0xff00ba88);
+  static const Color darkBlack = Color(0xff000000);
   static const Color successDark = Color(0xff00966d);
   static const Color successDarkmode = Color(0xff34eab9);
   static const Color successLight = Color(0xfff2fffb);

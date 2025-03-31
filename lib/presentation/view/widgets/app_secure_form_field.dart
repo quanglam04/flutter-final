@@ -7,8 +7,8 @@ import '../../../gen/assets.gen.dart';
 import '../../../shared/utils/keyboard.dart';
 import '../../resources/colors.dart';
 
-class AppFormField extends StatefulWidget {
-  const AppFormField({
+class AppSecureFormField extends StatefulWidget {
+  const AppSecureFormField({
     super.key,
     this.label,
     this.required = false,
@@ -31,7 +31,6 @@ class AppFormField extends StatefulWidget {
     this.isLoading = false,
     this.textDirection,
     this.obscuringCharacter = '*',
-    this.obscureText = false,
     this.validator,
     this.decoration,
   });
@@ -46,7 +45,6 @@ class AppFormField extends StatefulWidget {
   final TextInputType? keyboardType;
   final FocusNode? focusNode;
   final String obscuringCharacter;
-  final bool obscureText;
   final bool enabled;
   final TextEditingController? controller;
   final List<TextInputFormatter>? inputFormatters;
@@ -60,13 +58,13 @@ class AppFormField extends StatefulWidget {
   final Color? disableTextColor;
   final Color? disableBackgroundColor;
   final InputDecoration? decoration;
-
   @override
-  State<AppFormField> createState() => _AppFormFieldState();
+  State<AppSecureFormField> createState() => _AppSecureFormFieldState();
 }
 
-class _AppFormFieldState extends State<AppFormField> {
+class _AppSecureFormFieldState extends State<AppSecureFormField> {
   late TextEditingController _controller;
+  bool hidePassword = true;
 
   @override
   void initState() {
@@ -76,7 +74,7 @@ class _AppFormFieldState extends State<AppFormField> {
   }
 
   @override
-  void didUpdateWidget(covariant AppFormField oldWidget) {
+  void didUpdateWidget(covariant AppSecureFormField oldWidget) {
     if (_controller.text != widget.value) {
       _controller.text = widget.value ?? '';
     }
@@ -119,7 +117,7 @@ class _AppFormFieldState extends State<AppFormField> {
         Container(
           child: TextFormField(
             obscuringCharacter: '*',
-            obscureText: widget.obscureText ?? false,
+            obscureText: hidePassword,
             readOnly: widget.readOnly,
             onChanged: widget.onChanged,
             inputFormatters: widget.inputFormatters,
@@ -146,13 +144,20 @@ class _AppFormFieldState extends State<AppFormField> {
             decoration: InputDecoration(
               counterText: '',
               //suffixIconConstraints: BoxConstraints.tight(const Size(40, 44)),
-              suffixIcon:
-                  (widget.decoration?.suffixIcon != null)
-                      ? Padding(
-                        padding: const EdgeInsets.fromLTRB(8, 12, 12, 12),
-                        child: widget.decoration?.suffixIcon,
-                      )
-                      : null,
+              suffixIcon: InkWell(
+                onTap: () {
+                  setState(() {
+                    hidePassword = !hidePassword;
+                  });
+                },
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(8, 12, 12, 12),
+                  child:
+                      hidePassword
+                          ? Assets.icons.bookmark.svg()
+                          : Icon(Icons.visibility_outlined),
+                ),
+              ),
 
               //prefixIconConstraints: BoxConstraints.tight(const Size(40, 44)),
               prefixIcon:
