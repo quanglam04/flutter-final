@@ -219,13 +219,29 @@ class HomePage extends BasePage<HomeBloc, HomeEvent, HomeState> {
             SliverPersistentHeader(
               delegate: _StickyTabBarDelegate(
                 TabBar(
-                  labelPadding: const EdgeInsets.fromLTRB(25, 0, 0, 0),
+                  labelPadding: const EdgeInsets.fromLTRB(13, 0, 0, 0),
                   isScrollable: true,
                   indicatorSize: TabBarIndicatorSize.label,
                   indicatorColor: Colors.blue,
+                  labelColor: Colors.black,
+                  labelStyle: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 16,
+                    fontWeight: FontWeight.normal,
+                  ),
+
+                  unselectedLabelStyle: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.normal,
+                  ),
                   tabs:
                       actions.map((action) {
-                        return Tab(child: Text(action));
+                        return Tab(
+                          child: Text(
+                            action,
+                            style: const TextStyle(fontSize: 16),
+                          ),
+                        );
                       }).toList(),
                 ),
               ),
@@ -237,7 +253,9 @@ class HomePage extends BasePage<HomeBloc, HomeEvent, HomeState> {
               child: TabBarView(
                 children:
                     actions.map((action) {
-                      return Center(child: Text('Content for $action'));
+                      return Center(
+                        child: Text('Content for Trịnh Quang Lâm $action'),
+                      );
                     }).toList(),
               ),
             ),
@@ -295,6 +313,7 @@ class _StickyTabBarDelegate extends SliverPersistentHeaderDelegate {
     bool overlapsContent,
   ) {
     return Container(
+      padding: const EdgeInsets.only(left: 14),
       color: Theme.of(context).scaffoldBackgroundColor, // Match your background
       child: tabBar,
     );
