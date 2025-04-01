@@ -38,17 +38,18 @@ class HomePage extends BasePage<HomeBloc, HomeEvent, HomeState> {
       length: actions.length,
       child: Scaffold(
         resizeToAvoidBottomInset: true,
-        body: Padding(
-          padding: const EdgeInsets.only(
-            top: 24,
-            right: 24,
-            left: 24,
-            bottom: 57,
-          ),
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(bottom: 26),
+        body: CustomScrollView(
+          slivers: [
+            // First SliverAppBar for the header with logo and notification - WITHOUT SHADOW
+            SliverAppBar(
+              pinned: true,
+              floating: false,
+              automaticallyImplyLeading: false,
+              backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+              elevation: 0, // Remove shadow
+              shadowColor: Colors.transparent, // Remove shadow
+              title: Padding(
+                padding: const EdgeInsets.all(8),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -65,7 +66,7 @@ class HomePage extends BasePage<HomeBloc, HomeEvent, HomeState> {
                         borderRadius: BorderRadius.circular(6),
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.black.withValues(alpha: 0.05),
+                            color: Colors.black.withOpacity(0.05),
                             spreadRadius: 2,
                             blurRadius: 4,
                           ),
@@ -80,137 +81,233 @@ class HomePage extends BasePage<HomeBloc, HomeEvent, HomeState> {
                   ],
                 ),
               ),
-              SizedBox(height: 16),
-              AppFormField(
-                decoration: InputDecoration(
-                  prefixIcon: Padding(
-                    padding: const EdgeInsets.only(left: 10, right: 10),
-                    child: Assets.icons.search.svg(),
-                  ),
-                  prefixStyle: TextStyle(color: colorSchema?.grayscaleBodyText),
-                ),
-              ),
-              SizedBox(height: 16),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Trending',
-                    style: textTheme?.textMediumLink?.copyWith(
-                      color: colorSchema?.darkBlack,
-                    ),
-                  ),
-                  Text(
-                    'See all',
-                    style: textTheme?.textSmall?.copyWith(
-                      color: colorSchema?.grayscaleBodyText,
-                    ),
-                  ),
-                ],
-              ),
-              const Gap(16),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
+            ),
+
+            // Content between headers
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.only(top: 8, right: 24, left: 24),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Image.asset(
-                      'assets/images/ship.png',
-                      fit: BoxFit.fitHeight,
-                    ),
-                    SizedBox(height: 8),
-                    Text(
-                      'Europe',
-                      style: textTheme?.textXSmall?.copyWith(
-                        color: colorSchema?.grayscaleBodyText,
+                    // Search field
+                    SizedBox(height: 16),
+                    AppFormField(
+                      decoration: InputDecoration(
+                        prefixIcon: Padding(
+                          padding: const EdgeInsets.only(left: 10, right: 10),
+                          child: Assets.icons.search.svg(),
+                        ),
+                        prefixStyle: TextStyle(
+                          color: colorSchema?.grayscaleBodyText,
+                        ),
                       ),
                     ),
-                    const Gap(4),
-                    Text(
-                      'Russian warship: Moskva sinks in Black Sea',
-                      style: textTheme?.textMedium?.copyWith(
-                        color: colorSchema?.darkBlack,
-                      ),
-                    ),
-                    const Gap(4),
+                    // Trending section
+                    SizedBox(height: 16),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Row(
-                          children: [
-                            ClipOval(
-                              child: Image.asset(
-                                'assets/images/bbc.png',
-                                height: 20,
-                                width: 20,
-                                fit: BoxFit.fill,
-                              ),
-                            ),
-                            const Gap(4),
-                            Text(
-                              'BBC News',
-                              style: textTheme?.textXSmallLink?.copyWith(
-                                color: colorSchema?.grayscaleBodyText,
-                              ),
-                            ),
-                            const Gap(8),
-                            Assets.icons.clock.svg(),
-                            const Gap(6),
-                            Text(
-                              '4h ago',
-                              style: textTheme?.textXSmall?.copyWith(
-                                color: colorSchema?.grayscaleBodyText,
-                              ),
-                            ),
-                          ],
+                        Text(
+                          'Trending',
+                          style: textTheme?.textMediumLink?.copyWith(
+                            color: colorSchema?.darkBlack,
+                          ),
                         ),
-                        Assets.icons.threedot.svg(),
+                        Text(
+                          'See all',
+                          style: textTheme?.textSmall?.copyWith(
+                            color: colorSchema?.grayscaleBodyText,
+                          ),
+                        ),
                       ],
                     ),
+                    const Gap(16),
+                    // News item
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Image.asset(
+                            'assets/images/ship.png',
+                            fit: BoxFit.fitHeight,
+                          ),
+                          SizedBox(height: 8),
+                          Text(
+                            'Europe',
+                            style: textTheme?.textXSmall?.copyWith(
+                              color: colorSchema?.grayscaleBodyText,
+                            ),
+                          ),
+                          const Gap(4),
+                          Text(
+                            'Russian warship: Moskva sinks in Black Sea',
+                            style: textTheme?.textMedium?.copyWith(
+                              color: colorSchema?.darkBlack,
+                            ),
+                          ),
+                          const Gap(4),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                children: [
+                                  ClipOval(
+                                    child: Image.asset(
+                                      'assets/images/bbc.png',
+                                      height: 20,
+                                      width: 20,
+                                      fit: BoxFit.fill,
+                                    ),
+                                  ),
+                                  const Gap(4),
+                                  Text(
+                                    'BBC News',
+                                    style: textTheme?.textXSmallLink?.copyWith(
+                                      color: colorSchema?.grayscaleBodyText,
+                                    ),
+                                  ),
+                                  const Gap(8),
+                                  Assets.icons.clock.svg(),
+                                  const Gap(6),
+                                  Text(
+                                    '4h ago',
+                                    style: textTheme?.textXSmall?.copyWith(
+                                      color: colorSchema?.grayscaleBodyText,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Assets.icons.threedot.svg(),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                    const Gap(4),
                   ],
                 ),
               ),
-              const Gap(4),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Latest',
-                    style: textTheme?.textMediumLink?.copyWith(
-                      color: colorSchema?.darkBlack,
+            ),
+
+            // "Latest" header with SliverPersistentHeader
+            SliverPersistentHeader(
+              delegate: _StickyLatestHeaderDelegate(
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Latest',
+                      style: textTheme?.textMediumLink?.copyWith(
+                        color: colorSchema?.darkBlack,
+                      ),
                     ),
-                  ),
-                  Text(
-                    'See all',
-                    style: textTheme?.textSmall?.copyWith(
-                      color: colorSchema?.grayscaleBodyText,
+                    Text(
+                      'See all',
+                      style: textTheme?.textSmall?.copyWith(
+                        color: colorSchema?.grayscaleBodyText,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
+                horizontalPadding: 24,
               ),
-              Gap(5),
-              TabBar(
-                labelPadding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
-                isScrollable: true,
-                indicatorSize: TabBarIndicatorSize.label,
-                indicatorColor: Colors.blue,
-                tabs:
+              pinned: true,
+            ),
+
+            // TabBar as a second sticky header
+            SliverPersistentHeader(
+              delegate: _StickyTabBarDelegate(
+                TabBar(
+                  labelPadding: const EdgeInsets.fromLTRB(25, 0, 0, 0),
+                  isScrollable: true,
+                  indicatorSize: TabBarIndicatorSize.label,
+                  indicatorColor: Colors.blue,
+                  tabs:
+                      actions.map((action) {
+                        return Tab(child: Text(action));
+                      }).toList(),
+                ),
+              ),
+              pinned: true,
+            ),
+
+            // Content of the tab
+            SliverFillRemaining(
+              child: TabBarView(
+                children:
                     actions.map((action) {
-                      return Tab(
-                        child: Text(
-                          action,
-                          style: const TextStyle(
-                            color: Colors.black87,
-                            fontSize: 16,
-                          ),
-                        ),
-                      );
+                      return Center(child: Text('Content for $action'));
                     }).toList(),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
+  }
+}
+
+class _StickyLatestHeaderDelegate extends SliverPersistentHeaderDelegate {
+  final Widget child;
+  final double horizontalPadding;
+
+  _StickyLatestHeaderDelegate(this.child, {this.horizontalPadding = 0});
+
+  @override
+  Widget build(
+    BuildContext context,
+    double shrinkOffset,
+    bool overlapsContent,
+  ) {
+    return Container(
+      color: Theme.of(context).scaffoldBackgroundColor,
+      padding: EdgeInsets.symmetric(
+        horizontal: horizontalPadding,
+        vertical: 10,
+      ),
+      alignment: Alignment.centerLeft,
+      child: child,
+    );
+  }
+
+  @override
+  double get maxExtent => 50; // Adjust height as needed
+
+  @override
+  double get minExtent => 50; // Adjust height as needed
+
+  @override
+  bool shouldRebuild(covariant _StickyLatestHeaderDelegate oldDelegate) {
+    return child != oldDelegate.child;
+  }
+}
+
+class _StickyTabBarDelegate extends SliverPersistentHeaderDelegate {
+  final TabBar tabBar;
+
+  _StickyTabBarDelegate(this.tabBar);
+
+  @override
+  Widget build(
+    BuildContext context,
+    double shrinkOffset,
+    bool overlapsContent,
+  ) {
+    return Container(
+      color: Theme.of(context).scaffoldBackgroundColor, // Match your background
+      child: tabBar,
+    );
+  }
+
+  @override
+  double get maxExtent => tabBar.preferredSize.height;
+
+  @override
+  double get minExtent => tabBar.preferredSize.height;
+
+  @override
+  bool shouldRebuild(covariant _StickyTabBarDelegate oldDelegate) {
+    return tabBar != oldDelegate.tabBar;
   }
 }
