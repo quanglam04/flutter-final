@@ -188,24 +188,21 @@ class HomePage extends BasePage<HomeBloc, HomeEvent, HomeState> {
                   ),
                 ],
               ),
-              Gap(16),
+              Gap(5),
               TabBar(
                 labelPadding: EdgeInsets.all(0),
                 isScrollable: true,
                 tabs:
                     actions.map((action) {
-                      return Tab(
-                        child: Text(action),
-                      );
+                      return Tab(child: Text(action));
                     }).toList(),
               ),
-              TabBar(tabs:
-                actions.map((actions){
-                  return Center(
-
-                  );
-                }).toList()
-              )
+              TabBar(
+                tabs:
+                    actions.map((actions) {
+                      return Center();
+                    }).toList(),
+              ),
             ],
           ),
         ),
