@@ -264,7 +264,7 @@ class _StickyLatestHeaderDelegate extends SliverPersistentHeaderDelegate {
       color: Theme.of(context).scaffoldBackgroundColor,
       padding: EdgeInsets.symmetric(
         horizontal: horizontalPadding,
-        vertical: 10,
+        vertical: 15,
       ),
       alignment: Alignment.centerLeft,
       child: child,
