@@ -20,8 +20,7 @@ class AppRouter extends RootStackRouter {
     AutoRoute(page: HomeRoute.page),
     //AutoRoute(page: NewTaskRoute.page),
     //AutoRoute(page: TaskDetailRoute.page),
-    AutoRoute(page: SplashRoute.page, initial: true),
-    AutoRoute(page: LoginRoute.page),
+    AutoRoute(page: LoginRoute.page,initial: true),
     AutoRoute(page: HelloRoute.page),
   ];
 }
