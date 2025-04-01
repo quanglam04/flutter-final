@@ -8,6 +8,8 @@ environment:
   sdk: ^3.7.2
 
 dependencies:
+
+  flutter_native_splash: 2.4.4
   flutter:
     sdk: flutter
 
@@ -96,6 +98,7 @@ dependency_overrides:
       url: https://github.com/mbfakourii/Flare-Flutter.git
       path: flare_flutter
       ref: remove_hashValues
+
 
 flutter:
   uses-material-design: true
