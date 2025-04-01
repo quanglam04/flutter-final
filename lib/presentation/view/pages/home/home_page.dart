@@ -190,17 +190,21 @@ class HomePage extends BasePage<HomeBloc, HomeEvent, HomeState> {
               ),
               Gap(5),
               TabBar(
-                labelPadding: EdgeInsets.all(0),
+                labelPadding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
                 isScrollable: true,
+                indicatorSize: TabBarIndicatorSize.label,
+                indicatorColor: Colors.blue,
                 tabs:
                     actions.map((action) {
-                      return Tab(child: Text(action));
-                    }).toList(),
-              ),
-              TabBar(
-                tabs:
-                    actions.map((actions) {
-                      return Center();
+                      return Tab(
+                        child: Text(
+                          action,
+                          style: const TextStyle(
+                            color: Colors.black87,
+                            fontSize: 16,
+                          ),
+                        ),
+                      );
                     }).toList(),
               ),
             ],
