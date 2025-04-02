@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_clean_architecture/data/repositories/news_repository_impl.dart';
 import 'package:flutter_clean_architecture/presentation/view/widgets/app_form_field.dart';
 import 'package:flutter_clean_architecture/shared/extension/context.dart';
 import 'package:gap/gap.dart';
@@ -20,6 +21,8 @@ class HomePage extends BasePage<HomeBloc, HomeEvent, HomeState> {
 
   @override
   Widget builder(BuildContext context) {
+    final newsRepository = NewsRepositoryImpl();
+    final items = newsRepository.newsItems;
     final textTheme = context.themeOwn().textTheme;
     final colorSchema = context.themeOwn().colorSchema;
 
@@ -38,6 +41,42 @@ class HomePage extends BasePage<HomeBloc, HomeEvent, HomeState> {
       length: actions.length,
       child: Scaffold(
         resizeToAvoidBottomInset: true,
+        bottomNavigationBar: Container(
+          decoration: const BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black, // Màu bóng
+                blurRadius: 0.5, // Độ mờ
+                //spreadRadius: 2, // Độ lan
+                offset: Offset(0, 1), // Hướng bóng (âm để bóng nằm phía trên)
+              ),
+            ],
+          ),
+          child: BottomNavigationBar(
+            items: [
+              BottomNavigationBarItem(
+                icon: Assets.icons.home.svg(),
+                label: 'Home',
+              ),
+              BottomNavigationBarItem(
+                icon: Assets.icons.explorerIcon.svg(),
+                label: 'Explore',
+              ),
+              BottomNavigationBarItem(
+                icon: Assets.icons.bookmark.svg(),
+                label: 'Bookmark',
+              ),
+              BottomNavigationBarItem(
+                icon: Assets.icons.profile.svg(),
+                label: 'Profile',
+              ),
+            ],
+            currentIndex: 0,
+            selectedItemColor: colorSchema?.primary,
+            unselectedItemColor: colorSchema?.grayscaleBodyText,
+            type: BottomNavigationBarType.fixed,
+          ),
+        ),
         body: CustomScrollView(
           slivers: [
             // First SliverAppBar for the header with logo and notification - WITHOUT SHADOW
@@ -56,7 +95,7 @@ class HomePage extends BasePage<HomeBloc, HomeEvent, HomeState> {
                     Container(
                       width: 99,
                       height: 30,
-                      child: Assets.images.logo.svg(),
+                      child: Assets.images.logoSvg.svg(),
                     ),
                     Container(
                       width: 32,
@@ -219,7 +258,7 @@ class HomePage extends BasePage<HomeBloc, HomeEvent, HomeState> {
             SliverPersistentHeader(
               delegate: _StickyTabBarDelegate(
                 TabBar(
-                  labelPadding: const EdgeInsets.fromLTRB(13, 0, 0, 0),
+                  labelPadding: const EdgeInsets.fromLTRB(13, 0, 0, 4),
                   isScrollable: true,
                   indicatorSize: TabBarIndicatorSize.label,
                   indicatorColor: Colors.blue,
@@ -253,8 +292,92 @@ class HomePage extends BasePage<HomeBloc, HomeEvent, HomeState> {
               child: TabBarView(
                 children:
                     actions.map((action) {
-                      return Center(
-                        child: Text('Content for Trịnh Quang Lâm $action'),
+                      return ListView.builder(
+                        padding: EdgeInsets.only(top: 0),
+                        itemCount: items.length,
+                        itemBuilder: (context, index) {
+                          final newsItem = items[index];
+                          return Padding(
+                            padding: EdgeInsets.only(
+                              left: 30,
+                              right: 30,
+                              top: index == 0 ? 0 : 16.4,
+                              bottom: 16.4,
+                            ),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(
+                                    10,
+                                  ), // Bo góc với bán kính 20
+                                  child: Image.asset(
+                                    newsItem.imageUrl,
+                                    fit:
+                                        BoxFit
+                                            .cover, // Đảm bảo hình ảnh phủ đầy vùng chứa
+                                  ),
+                                ),
+                                SizedBox(width: 5),
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        newsItem.category,
+                                        style: const TextStyle(
+                                          color: Colors.black87,
+                                          fontSize: 12,
+                                        ),
+                                      ),
+                                      SizedBox(height: 8),
+                                      Text(
+                                        newsItem.title,
+                                        style: const TextStyle(
+                                          color: Colors.black87,
+                                          fontSize: 16,
+                                        ),
+                                        maxLines: 2,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                      SizedBox(height: 4),
+                                      Row(
+                                        children: [
+                                          Image.asset(newsItem.author),
+                                          SizedBox(width: 4),
+                                          Text(
+                                            newsItem.source,
+                                            style: const TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 12,
+                                            ),
+                                          ),
+                                          SizedBox(width: 8),
+                                          const Icon(
+                                            Icons.access_time,
+                                            color: Colors.black87,
+                                            size: 12,
+                                          ),
+                                          SizedBox(width: 2),
+                                          Text(
+                                            newsItem.timeAgo,
+                                            style: const TextStyle(
+                                              color: Colors.black87,
+                                              fontSize: 12,
+                                            ),
+                                          ),
+                                          const Spacer(),
+                                          const Text('...'),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                        },
                       );
                     }).toList(),
               ),
@@ -313,7 +436,7 @@ class _StickyTabBarDelegate extends SliverPersistentHeaderDelegate {
     bool overlapsContent,
   ) {
     return Container(
-      padding: const EdgeInsets.only(left: 14),
+      padding: const EdgeInsets.only(left: 14, bottom: 20),
       color: Theme.of(context).scaffoldBackgroundColor, // Match your background
       child: tabBar,
     );
