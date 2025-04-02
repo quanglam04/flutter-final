@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_clean_architecture/data/repositories/news_repository_impl.dart';
 import 'package:flutter_clean_architecture/presentation/view/widgets/app_form_field.dart';
 import 'package:flutter_clean_architecture/shared/extension/context.dart';
 import 'package:gap/gap.dart';
@@ -20,6 +21,8 @@ class HomePage extends BasePage<HomeBloc, HomeEvent, HomeState> {
 
   @override
   Widget builder(BuildContext context) {
+    final newsRepository = NewsRepositoryImpl();
+    final items = newsRepository.newsItems;
     final textTheme = context.themeOwn().textTheme;
     final colorSchema = context.themeOwn().colorSchema;
 
@@ -277,8 +280,91 @@ class HomePage extends BasePage<HomeBloc, HomeEvent, HomeState> {
               child: TabBarView(
                 children:
                     actions.map((action) {
-                      return Center(
-                        child: Text('Content for Trịnh Quang Lâm $action'),
+                      return ListView.builder(
+                        itemCount: items.length,
+                        itemBuilder: (context, index) {
+                          final newsItem =
+                              items[index]; // Lấy một item từ danh sách _newsItems
+
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 30,
+                              vertical: 16.4,
+                            ),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(
+                                    10,
+                                  ), // Bo góc với bán kính 20
+                                  child: Image.asset(
+                                    newsItem.imageUrl,
+                                    fit:
+                                        BoxFit
+                                            .cover, // Đảm bảo hình ảnh phủ đầy vùng chứa
+                                  ),
+                                ),
+                                SizedBox(width: 5),
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        newsItem.category,
+                                        style: const TextStyle(
+                                          color: Colors.black87,
+                                          fontSize: 12,
+                                        ),
+                                      ),
+                                      SizedBox(height: 8),
+                                      Text(
+                                        newsItem.title,
+                                        style: const TextStyle(
+                                          color: Colors.black87,
+                                          fontSize: 16,
+                                        ),
+                                        maxLines: 2,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                      SizedBox(height: 4),
+                                      Row(
+                                        children: [
+                                          Image.asset(newsItem.author),
+                                          SizedBox(width: 4),
+                                          Text(
+                                            newsItem.source,
+                                            style: const TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 12,
+                                            ),
+                                          ),
+                                          SizedBox(width: 8),
+                                          const Icon(
+                                            Icons.access_time,
+                                            color: Colors.black87,
+                                            size: 12,
+                                          ),
+                                          SizedBox(width: 2),
+                                          Text(
+                                            newsItem.timeAgo,
+                                            style: const TextStyle(
+                                              color: Colors.black87,
+                                              fontSize: 12,
+                                            ),
+                                          ),
+                                          const Spacer(),
+                                          const Text('...'),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                        },
                       );
                     }).toList(),
               ),
@@ -337,7 +423,7 @@ class _StickyTabBarDelegate extends SliverPersistentHeaderDelegate {
     bool overlapsContent,
   ) {
     return Container(
-      padding: const EdgeInsets.only(left: 14),
+      padding: const EdgeInsets.only(left: 14, bottom: 18),
       color: Theme.of(context).scaffoldBackgroundColor, // Match your background
       child: tabBar,
     );
