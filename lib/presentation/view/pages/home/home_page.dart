@@ -232,59 +232,74 @@ class HomePage extends BasePage<HomeBloc, HomeEvent, HomeState> {
                 ),
               ),
             ),
-            SliverPersistentHeader(
-              delegate: _StickyLatestHeaderDelegate(
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            SliverAppBar(
+              pinned: true,
+              toolbarHeight: 0,
+              elevation: 0,
+              bottom: PreferredSize(
+                preferredSize: const Size.fromHeight(90),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      'Latest',
-                      style: textTheme?.textMediumLink?.copyWith(
-                        color: colorSchema?.darkBlack,
+                    Padding(
+                      padding: const EdgeInsets.only(right: 24, left: 24),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Latest',
+                            style: textTheme?.textMediumLink?.copyWith(
+                              color: colorSchema?.darkBlack,
+                            ),
+                          ),
+                          Text(
+                            'See all',
+                            style: textTheme?.textSmall?.copyWith(
+                              color: colorSchema?.grayscaleBodyText,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                    Text(
-                      'See all',
-                      style: textTheme?.textSmall?.copyWith(
-                        color: colorSchema?.grayscaleBodyText,
-                      ),
+                    Gap(16),
+                    BlocBuilder<HomeBloc, HomeState>(
+                      buildWhen: (previousState, state) {
+                        return previousState.listTopics != state.listTopics;
+                      },
+                      builder: (context, state) {
+                        return TabBar(
+                          padding: const EdgeInsets.only(left: 24),
+                          labelPadding: const EdgeInsets.only(right: 10),
+                          indicatorSize: TabBarIndicatorSize.label,
+                          isScrollable: true,
+                          indicatorColor: colorSchema?.primaryDefault,
+                          labelStyle: textTheme?.textMedium,
+                          labelColor: colorSchema?.darkBlack,
+                          unselectedLabelStyle: textTheme?.textMedium?.copyWith(
+                            color: colorSchema?.grayscaleBodyText,
+                          ),
+
+                          tabs: [
+                            const Tab(child: Text('All')),
+                            ...?state.listTopics?.map((topics) {
+                              return Tab(child: Text(topics.topicName));
+                            }).toList(),
+                          ],
+                          onTap: (index) {
+                            context.read<HomeBloc>().add(
+                              index != 0
+                                  ? HomeEvent.changeTab(
+                                    state.listTopics![index - 1].topicName,
+                                  )
+                                  : const HomeEvent.changeTab(''),
+                            );
+                          },
+                        );
+                      },
                     ),
                   ],
                 ),
-                horizontalPadding: 24,
               ),
-              pinned: true,
-            ),
-            SliverPersistentHeader(
-              delegate: _StickyTabBarDelegate(
-                TabBar(
-                  labelPadding: const EdgeInsets.fromLTRB(13, 0, 0, 4),
-                  isScrollable: true,
-                  indicatorSize: TabBarIndicatorSize.label,
-                  indicatorColor: Colors.blue,
-                  labelColor: Colors.black,
-                  labelStyle: const TextStyle(
-                    color: Colors.black,
-                    fontSize: 16,
-                    fontWeight: FontWeight.normal,
-                  ),
-
-                  unselectedLabelStyle: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.normal,
-                  ),
-                  tabs:
-                      actions.map((action) {
-                        return Tab(
-                          child: Text(
-                            action,
-                            style: const TextStyle(fontSize: 16),
-                          ),
-                        );
-                      }).toList(),
-                ),
-              ),
-              pinned: true,
             ),
             SliverFillRemaining(
               child: TabBarView(
@@ -296,10 +311,10 @@ class HomePage extends BasePage<HomeBloc, HomeEvent, HomeState> {
                         itemBuilder: (context, index) {
                           final newsItem = items[index];
                           return Padding(
-                            padding: EdgeInsets.only(
+                            padding: const EdgeInsets.only(
                               left: 30,
                               right: 30,
-                              top: index == 0 ? 0 : 16.4,
+                              top: 16.4,
                               bottom: 16.4,
                             ),
                             child: Row(
@@ -382,70 +397,5 @@ class HomePage extends BasePage<HomeBloc, HomeEvent, HomeState> {
         ),
       ),
     );
-  }
-}
-
-class _StickyLatestHeaderDelegate extends SliverPersistentHeaderDelegate {
-  final Widget child;
-  final double horizontalPadding;
-
-  _StickyLatestHeaderDelegate(this.child, {this.horizontalPadding = 0});
-
-  @override
-  Widget build(
-    BuildContext context,
-    double shrinkOffset,
-    bool overlapsContent,
-  ) {
-    return Container(
-      color: Theme.of(context).scaffoldBackgroundColor,
-      padding: EdgeInsets.symmetric(
-        horizontal: horizontalPadding,
-        vertical: 15,
-      ),
-      alignment: Alignment.centerLeft,
-      child: child,
-    );
-  }
-
-  @override
-  double get maxExtent => 50; // Adjust height as needed
-
-  @override
-  double get minExtent => 50; // Adjust height as needed
-
-  @override
-  bool shouldRebuild(covariant _StickyLatestHeaderDelegate oldDelegate) {
-    return child != oldDelegate.child;
-  }
-}
-
-class _StickyTabBarDelegate extends SliverPersistentHeaderDelegate {
-  final TabBar tabBar;
-
-  _StickyTabBarDelegate(this.tabBar);
-
-  @override
-  Widget build(
-    BuildContext context,
-    double shrinkOffset,
-    bool overlapsContent,
-  ) {
-    return Container(
-      padding: const EdgeInsets.only(left: 14, bottom: 20),
-      color: Theme.of(context).scaffoldBackgroundColor, // Match your background
-      child: tabBar,
-    );
-  }
-
-  @override
-  double get maxExtent => tabBar.preferredSize.height;
-
-  @override
-  double get minExtent => tabBar.preferredSize.height;
-
-  @override
-  bool shouldRebuild(covariant _StickyTabBarDelegate oldDelegate) {
-    return tabBar != oldDelegate.tabBar;
   }
 }
