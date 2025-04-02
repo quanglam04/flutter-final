@@ -38,6 +38,30 @@ class HomePage extends BasePage<HomeBloc, HomeEvent, HomeState> {
       length: actions.length,
       child: Scaffold(
         resizeToAvoidBottomInset: true,
+        bottomNavigationBar: BottomNavigationBar(
+          items: [
+            BottomNavigationBarItem(
+              icon: Assets.icons.home.svg(),
+              label: 'Home',
+            ),
+            BottomNavigationBarItem(
+              icon: Assets.icons.explorerIcon.svg(),
+              label: 'Explore',
+            ),
+            BottomNavigationBarItem(
+              icon: Assets.icons.bookmark.svg(),
+              label: 'Bookmark',
+            ),
+            BottomNavigationBarItem(
+              icon: Assets.icons.profile.svg(),
+              label: 'Profile',
+            ),
+          ],
+          currentIndex: 0,
+          selectedItemColor: colorSchema?.primary,
+          unselectedItemColor: colorSchema?.grayscaleBodyText,
+          type: BottomNavigationBarType.fixed,
+        ),
         body: CustomScrollView(
           slivers: [
             // First SliverAppBar for the header with logo and notification - WITHOUT SHADOW
@@ -56,7 +80,7 @@ class HomePage extends BasePage<HomeBloc, HomeEvent, HomeState> {
                     Container(
                       width: 99,
                       height: 30,
-                      child: Assets.images.logo.svg(),
+                      child: Assets.images.logoSvg.svg(),
                     ),
                     Container(
                       width: 32,
