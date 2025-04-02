@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_clean_architecture/data/repositories/news_repository_impl.dart';
+import 'package:flutter_clean_architecture/presentation/router/router.dart';
 import 'package:flutter_clean_architecture/presentation/view/widgets/app_form_field.dart';
 import 'package:flutter_clean_architecture/shared/extension/context.dart';
 import 'package:gap/gap.dart';
@@ -79,13 +80,12 @@ class HomePage extends BasePage<HomeBloc, HomeEvent, HomeState> {
         ),
         body: CustomScrollView(
           slivers: [
-            // First SliverAppBar for the header with logo and notification - WITHOUT SHADOW
             SliverAppBar(
               pinned: true,
               floating: false,
               automaticallyImplyLeading: false,
               backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-              elevation: 0, // Remove shadow
+              elevation: 0,
               shadowColor: Colors.transparent, // Remove shadow
               title: Padding(
                 padding: const EdgeInsets.all(8),
@@ -122,24 +122,28 @@ class HomePage extends BasePage<HomeBloc, HomeEvent, HomeState> {
               ),
             ),
 
-            // Content between headers
             SliverToBoxAdapter(
               child: Padding(
                 padding: const EdgeInsets.only(top: 8, right: 24, left: 24),
                 child: Column(
                   children: [
-                    // Search field
                     SizedBox(height: 16),
                     AppFormField(
                       decoration: InputDecoration(
+                        hintText: "Search",
                         prefixIcon: Padding(
                           padding: const EdgeInsets.only(left: 10, right: 10),
                           child: Assets.icons.search.svg(),
                         ),
+                        suffixIcon: Assets.icons.frame.svg(),
+
                         prefixStyle: TextStyle(
                           color: colorSchema?.grayscaleBodyText,
                         ),
                       ),
+                      onTap: () {
+                        context.pushRoute(SearchRoute());
+                      },
                     ),
                     // Trending section
                     SizedBox(height: 16),
@@ -228,8 +232,6 @@ class HomePage extends BasePage<HomeBloc, HomeEvent, HomeState> {
                 ),
               ),
             ),
-
-            // "Latest" header with SliverPersistentHeader
             SliverPersistentHeader(
               delegate: _StickyLatestHeaderDelegate(
                 Row(
@@ -253,8 +255,6 @@ class HomePage extends BasePage<HomeBloc, HomeEvent, HomeState> {
               ),
               pinned: true,
             ),
-
-            // TabBar as a second sticky header
             SliverPersistentHeader(
               delegate: _StickyTabBarDelegate(
                 TabBar(
@@ -286,8 +286,6 @@ class HomePage extends BasePage<HomeBloc, HomeEvent, HomeState> {
               ),
               pinned: true,
             ),
-
-            // Content of the tab
             SliverFillRemaining(
               child: TabBarView(
                 children:
@@ -308,9 +306,7 @@ class HomePage extends BasePage<HomeBloc, HomeEvent, HomeState> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 ClipRRect(
-                                  borderRadius: BorderRadius.circular(
-                                    10,
-                                  ), // Bo góc với bán kính 20
+                                  borderRadius: BorderRadius.circular(10),
                                   child: Image.asset(
                                     newsItem.imageUrl,
                                     fit:
