@@ -1,6 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_clean_architecture/gen/assets.gen.dart';
+import 'package:flutter_clean_architecture/presentation/view/widgets/app_form_field.dart';
+import 'package:flutter_clean_architecture/shared/extension/context.dart';
 
 import '../../../base/base_page.dart';
 import 'search_bloc.dart';
@@ -17,6 +20,27 @@ class SearchPage extends BasePage<SearchBloc, SearchEvent, SearchState> {
 
   @override
   Widget builder(BuildContext context) {
-    return Scaffold(appBar: AppBar(title: Text("Trinh Quang Lam")));
+    final List<String> listCategory = ["News", "Topics", "Author"];
+    final colorSchema = context.themeOwn().colorSchema;
+    return Scaffold(
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 24, vertical: 68),
+        child: Column(
+          children: [
+            AppFormField(
+              decoration: InputDecoration(
+                hintText: "Search",
+                prefixIcon: Padding(
+                  padding: const EdgeInsets.only(left: 10, right: 10),
+                  child: Assets.icons.search.svg(),
+                ),
+                suffixIcon: Assets.icons.clearAll.svg(),
+                prefixStyle: TextStyle(color: colorSchema?.grayscaleBodyText),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
