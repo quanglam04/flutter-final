@@ -16,6 +16,22 @@ class NewsRepositoryImpl extends NewsRepository {
       author: 'assets/images/bbc.png',
     ),
     NewsItem(
+      title: 'Ukraine\'s President Zelensky to BBC: Blood money being paid...',
+      source: 'BBC News',
+      timeAgo: '14m ago',
+      imageUrl: 'assets/images/news_image.png',
+      category: 'Europe',
+      author: 'assets/images/bbc.png',
+    ),
+    NewsItem(
+      title: 'Ukraine\'s President Zelensky to BBC: Blood money being paid...',
+      source: 'BBC News',
+      timeAgo: '14m ago',
+      imageUrl: 'assets/images/news_image.png',
+      category: 'Europe',
+      author: 'assets/images/bbc.png',
+    ),
+    NewsItem(
       title: 'Her train broke down. Her phone died. And then she met her..',
       source: 'CNN',
       timeAgo: '1h ago',

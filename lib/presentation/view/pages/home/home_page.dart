@@ -41,29 +41,41 @@ class HomePage extends BasePage<HomeBloc, HomeEvent, HomeState> {
       length: actions.length,
       child: Scaffold(
         resizeToAvoidBottomInset: true,
-        bottomNavigationBar: BottomNavigationBar(
-          items: [
-            BottomNavigationBarItem(
-              icon: Assets.icons.home.svg(),
-              label: 'Home',
-            ),
-            BottomNavigationBarItem(
-              icon: Assets.icons.explorerIcon.svg(),
-              label: 'Explore',
-            ),
-            BottomNavigationBarItem(
-              icon: Assets.icons.bookmark.svg(),
-              label: 'Bookmark',
-            ),
-            BottomNavigationBarItem(
-              icon: Assets.icons.profile.svg(),
-              label: 'Profile',
-            ),
-          ],
-          currentIndex: 0,
-          selectedItemColor: colorSchema?.primary,
-          unselectedItemColor: colorSchema?.grayscaleBodyText,
-          type: BottomNavigationBarType.fixed,
+        bottomNavigationBar: Container(
+          decoration: const BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black, // Màu bóng
+                blurRadius: 0.5, // Độ mờ
+                //spreadRadius: 2, // Độ lan
+                offset: Offset(0, 1), // Hướng bóng (âm để bóng nằm phía trên)
+              ),
+            ],
+          ),
+          child: BottomNavigationBar(
+            items: [
+              BottomNavigationBarItem(
+                icon: Assets.icons.home.svg(),
+                label: 'Home',
+              ),
+              BottomNavigationBarItem(
+                icon: Assets.icons.explorerIcon.svg(),
+                label: 'Explore',
+              ),
+              BottomNavigationBarItem(
+                icon: Assets.icons.bookmark.svg(),
+                label: 'Bookmark',
+              ),
+              BottomNavigationBarItem(
+                icon: Assets.icons.profile.svg(),
+                label: 'Profile',
+              ),
+            ],
+            currentIndex: 0,
+            selectedItemColor: colorSchema?.primary,
+            unselectedItemColor: colorSchema?.grayscaleBodyText,
+            type: BottomNavigationBarType.fixed,
+          ),
         ),
         body: CustomScrollView(
           slivers: [
@@ -246,7 +258,7 @@ class HomePage extends BasePage<HomeBloc, HomeEvent, HomeState> {
             SliverPersistentHeader(
               delegate: _StickyTabBarDelegate(
                 TabBar(
-                  labelPadding: const EdgeInsets.fromLTRB(13, 0, 0, 0),
+                  labelPadding: const EdgeInsets.fromLTRB(13, 0, 0, 4),
                   isScrollable: true,
                   indicatorSize: TabBarIndicatorSize.label,
                   indicatorColor: Colors.blue,
@@ -281,15 +293,16 @@ class HomePage extends BasePage<HomeBloc, HomeEvent, HomeState> {
                 children:
                     actions.map((action) {
                       return ListView.builder(
+                        padding: EdgeInsets.only(top: 0),
                         itemCount: items.length,
                         itemBuilder: (context, index) {
-                          final newsItem =
-                              items[index]; // Lấy một item từ danh sách _newsItems
-
+                          final newsItem = items[index];
                           return Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 30,
-                              vertical: 16.4,
+                            padding: EdgeInsets.only(
+                              left: 30,
+                              right: 30,
+                              top: index == 0 ? 0 : 16.4,
+                              bottom: 16.4,
                             ),
                             child: Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -423,7 +436,7 @@ class _StickyTabBarDelegate extends SliverPersistentHeaderDelegate {
     bool overlapsContent,
   ) {
     return Container(
-      padding: const EdgeInsets.only(left: 14, bottom: 18),
+      padding: const EdgeInsets.only(left: 14, bottom: 20),
       color: Theme.of(context).scaffoldBackgroundColor, // Match your background
       child: tabBar,
     );
