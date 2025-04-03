@@ -14,64 +14,85 @@ class News extends StatelessWidget {
     final colorSchema = context.themeOwn().colorSchema;
     return InkWell(
       child: Padding(
-        padding: const EdgeInsets.only(right: 24, left: 24),
+        padding: const EdgeInsets.symmetric(horizontal: 24),
         child: Column(
           children: [
             Container(
-              padding: const EdgeInsets.only(left: 8, right: 8, bottom: 8),
-              width: 380,
-              height: 120,
+              padding: const EdgeInsets.all(8),
+              width: double.infinity,
+              constraints: const BoxConstraints(maxHeight: 120),
               child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                     ),
                     clipBehavior: Clip.hardEdge,
-                    child: Container(
-                      child: Image.asset(
-                        width: 96,
-                        height: 96,
-                        fit: BoxFit.fitHeight,
-                        newsItem.imageUrl,
-                      ),
+                    child: Image.asset(
+                      width: 96,
+                      height: 96,
+                      fit: BoxFit.cover,
+                      newsItem.imageUrl,
                     ),
                   ),
-                  const Gap(5),
-                  Container(
-                    width: 264,
-                    height: 120,
+                  const Gap(8),
+                  Expanded(
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
                       children: [
-                        Text(newsItem.category),
-                        Text(newsItem.title),
+                        Text(
+                          newsItem.category,
+                          style: textTheme?.textSmall,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          newsItem.title,
+                          maxLines: 3,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        const Spacer(),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Row(
-                              children: [
-                                ClipOval(
-                                  child: Image.asset(
-                                    newsItem.author,
-                                    height: 20,
-                                    width: 20,
-                                    fit: BoxFit.fill,
+                            Expanded(
+                              child: Row(
+                                children: [
+                                  ClipOval(
+                                    child: Image.asset(
+                                      newsItem.author,
+                                      height: 20,
+                                      width: 20,
+                                      fit: BoxFit.cover,
+                                    ),
                                   ),
-                                ),
-                                Text(
-                                  newsItem.source,
-                                  style: textTheme?.textXSmallLink?.copyWith(
-                                    color: colorSchema?.grayscaleBodyText,
+                                  const SizedBox(width: 4),
+                                  Flexible(
+                                    child: Text(
+                                      newsItem.source,
+                                      style: textTheme?.textXSmallLink
+                                          ?.copyWith(
+                                            color:
+                                                colorSchema?.grayscaleBodyText,
+                                          ),
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
                                   ),
-                                ),
-                                Assets.icons.clock.svg(),
-                                Text(
-                                  newsItem.timeAgo,
-                                  style: textTheme?.textXSmall?.copyWith(
-                                    color: colorSchema?.grayscaleBodyText,
+                                  const SizedBox(width: 4),
+                                  Assets.icons.clock.svg(width: 12, height: 12),
+                                  const SizedBox(width: 4),
+                                  Text(
+                                    newsItem.timeAgo,
+                                    style: textTheme?.textXSmall?.copyWith(
+                                      color: colorSchema?.grayscaleBodyText,
+                                    ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                             Assets.icons.threedot.svg(),
                           ],

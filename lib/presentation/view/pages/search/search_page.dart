@@ -80,6 +80,8 @@ class SearchPage extends BasePage<SearchBloc, SearchEvent, SearchState> {
                   labelStyle: textTheme?.textMedium,
                   labelColor: colorSchema?.darkBlack,
                   indicatorSize: TabBarIndicatorSize.label,
+                  indicatorWeight: 5,
+                  indicatorPadding: EdgeInsets.symmetric(vertical: -4),
                   unselectedLabelStyle: textTheme?.textMedium,
                   unselectedLabelColor: colorSchema?.grayscaleBodyText,
                   labelPadding: EdgeInsets.zero,
@@ -90,7 +92,7 @@ class SearchPage extends BasePage<SearchBloc, SearchEvent, SearchState> {
                   ],
                 ),
               ),
-
+              const Gap(25),
               Expanded(
                 child: BlocBuilder<SearchBloc, SearchState>(
                   builder: (context, state) {
