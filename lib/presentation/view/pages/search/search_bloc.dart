@@ -1,6 +1,7 @@
 import 'package:flutter_clean_architecture/domain/entities/news.dart';
 import 'package:flutter_clean_architecture/domain/entities/topic.dart';
 import 'package:flutter_clean_architecture/domain/usecases/search_news_use_case.dart';
+import 'package:flutter_clean_architecture/domain/usecases/search_topics_use_case.dart';
 import 'package:flutter_clean_architecture/shared/utils/logger.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
@@ -17,7 +18,9 @@ part 'search_state.dart';
 @injectable
 class SearchBloc extends BaseBloc<SearchEvent, SearchState> {
   final SearchNewsUseCase _searchNewsUseCase;
-  SearchBloc(this._searchNewsUseCase) : super(const SearchState()) {
+  final SearchTopicsUseCase _searchTopicsUseCase;
+  SearchBloc(this._searchNewsUseCase, this._searchTopicsUseCase)
+    : super(const SearchState()) {
     on<SearchEvent>((event, emit) async {
       try {
         switch (event) {
@@ -28,14 +31,21 @@ class SearchBloc extends BaseBloc<SearchEvent, SearchState> {
             );
             listNewsResult.forEach((x) => logger.d(">>$x"));
             emit(state.copyWith(listNewsItem: listNewsResult));
+
+            final List<Topic> listTopicsResult = await _searchTopicsUseCase
+                .call(params: SearchTopicsParam(''));
+            emit(state.copyWith(listTopic: listTopicsResult));
             break;
           case _ChangeSearchKey(key: final key):
             emit(state.copyWith(searchKey: key));
             final List<NewsItem> listNewsResult = await _searchNewsUseCase.call(
               params: SearchNewsParam(state.searchKey ?? ''),
             );
-
             emit(state.copyWith(listNewsItem: listNewsResult));
+
+            final List<Topic> listTopicsResult = await _searchTopicsUseCase
+                .call(params: SearchTopicsParam(state.searchKey ?? ''));
+            emit(state.copyWith(listTopic: listTopicsResult));
 
           case _ChangeSaveTopic():
             throw UnimplementedError();

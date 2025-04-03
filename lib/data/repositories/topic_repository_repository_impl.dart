@@ -15,6 +15,9 @@ class TopicRepositoryImpl implements TopicRepository {
               ),
             )
             .toList();
+    if (key.trim() == '') {
+      return _topics;
+    }
     return filteredTopics;
   }
 
