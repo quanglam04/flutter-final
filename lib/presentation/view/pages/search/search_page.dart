@@ -5,6 +5,7 @@ import 'package:flutter_clean_architecture/gen/assets.gen.dart';
 import 'package:flutter_clean_architecture/presentation/base/page_status.dart';
 import 'package:flutter_clean_architecture/presentation/view/widgets/app_form_field.dart';
 import 'package:flutter_clean_architecture/presentation/view/widgets/list_news.dart';
+import 'package:flutter_clean_architecture/presentation/view/widgets/list_topics.dart';
 import 'package:flutter_clean_architecture/shared/extension/context.dart';
 import 'package:flutter_clean_architecture/shared/utils/logger.dart';
 import 'package:gap/gap.dart';
@@ -92,7 +93,7 @@ class SearchPage extends BasePage<SearchBloc, SearchEvent, SearchState> {
                   ],
                 ),
               ),
-              const Gap(25),
+              const Gap(20),
               Expanded(
                 child: BlocBuilder<SearchBloc, SearchState>(
                   builder: (context, state) {
@@ -108,6 +109,7 @@ class SearchPage extends BasePage<SearchBloc, SearchEvent, SearchState> {
                     return TabBarView(
                       children: [
                         ListNewsItem(listNewsItem: state.listNewsItem ?? []),
+                        ListTopics(listTopic: state.listTopic ?? []),
                       ],
                     );
                   },
