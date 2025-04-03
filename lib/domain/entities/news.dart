@@ -16,4 +16,9 @@ class NewsItem {
     required this.category,
     required this.author,
   });
+
+  @override
+  String toString() {
+    return 'NewsItem{title: $title, source: $source, time: $timeAgo, imageUrl: $imageUrl, categories: $category}';
+  }
 }

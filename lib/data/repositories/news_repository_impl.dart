@@ -1,4 +1,5 @@
 import 'package:flutter_clean_architecture/domain/entities/news.dart';
+import 'package:flutter_clean_architecture/shared/utils/logger.dart';
 import 'package:injectable/injectable.dart';
 import '../../domain/repositories/news_repository.dart';
 
@@ -28,7 +29,10 @@ class NewsRepositoryImpl implements NewsRepository {
                   ),
             )
             .toList();
-    //if(searchResult.isEmpty) throw BusinessErrorEntityData(name: 'danh sách rỗng', message: 'danh sách rỗng');
+    if (key.trim() == '') {
+      logger.d("Không truyền key");
+      return _listNews;
+    }
     return searchResult;
   }
 
