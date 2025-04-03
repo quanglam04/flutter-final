@@ -54,7 +54,7 @@ class News extends StatelessWidget {
                           maxLines: 3,
                           overflow: TextOverflow.ellipsis,
                         ),
-                        const Spacer(),
+                        const Gap(12),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -103,6 +103,7 @@ class News extends StatelessWidget {
                 ],
               ),
             ),
+            const Gap(16),
           ],
         ),
       ),

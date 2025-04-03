@@ -27,7 +27,7 @@ class SearchPage extends BasePage<SearchBloc, SearchEvent, SearchState> {
     final textTheme = context.themeOwn().textTheme;
     final colorSchema = context.themeOwn().colorSchema;
     return DefaultTabController(
-      length: 1,
+      length: 2,
       child: SafeArea(
         child: Scaffold(
           body: Column(
@@ -87,7 +87,7 @@ class SearchPage extends BasePage<SearchBloc, SearchEvent, SearchState> {
                   labelPadding: EdgeInsets.zero,
                   tabs: const <Widget>[
                     Tab(text: 'News'),
-                    // Tab(text: 'Topics'),
+                    Tab(text: 'Topics'),
                     // Tab(text: 'Author'),
                   ],
                 ),
