@@ -316,6 +316,7 @@ class HomePage extends BasePage<HomeBloc, HomeEvent, HomeState> {
                     ),
                   ),
                 ),
+
                 SliverFillRemaining(
                   child: TabBarView(
                     children:

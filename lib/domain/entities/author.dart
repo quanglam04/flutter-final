@@ -6,7 +6,7 @@ class Author {
   final String imagePath;
   final String brandName;
   final int followers;
-  final bool isFollow;
+  bool isFollow;
   Author(
     this.authorId,
     this.imagePath,

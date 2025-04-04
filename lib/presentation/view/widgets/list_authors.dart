@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_clean_architecture/domain/entities/author.dart';
+import 'package:flutter_clean_architecture/gen/assets.gen.dart';
+import 'package:flutter_clean_architecture/presentation/view/pages/search/search_bloc.dart';
 import 'package:flutter_clean_architecture/shared/extension/context.dart';
 import 'package:gap/gap.dart';
 
@@ -61,7 +64,7 @@ class _ListAuthorState extends State<ListAuthor> {
                           softWrap: true,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
-                          widget.listAuthor[index].followers.toString(),
+                          '${formatNumber(widget.listAuthor[index].followers)} Followers',
                           style: textTheme?.textMedium?.copyWith(
                             color: colorSchema?.darkBlack,
                           ),
@@ -70,6 +73,27 @@ class _ListAuthorState extends State<ListAuthor> {
                     ),
                   ),
                   Gap(8),
+                  BlocBuilder<SearchBloc, SearchState>(
+                    buildWhen: (preStatus, currentStatus) {
+                      return preStatus.followAuthor !=
+                          currentStatus.followAuthor;
+                    },
+                    builder: (context, state) {
+                      return InkWell(
+                        child:
+                            widget.listAuthor[index].isFollow
+                                ? Assets.icons.following.svg()
+                                : Assets.icons.follow.svg(),
+                        onTap: () {
+                          context.read<SearchBloc>().add(
+                            SearchEvent.changeFollowAuthor(
+                              widget.listAuthor[index].brandName,
+                            ),
+                          );
+                        },
+                      );
+                    },
+                  ),
                 ],
               ),
             ),
@@ -78,5 +102,15 @@ class _ListAuthorState extends State<ListAuthor> {
         );
       },
     );
+  }
+}
+
+String formatNumber(int number) {
+  if (number >= 1000000) {
+    return '${(number / 1000000).toStringAsFixed(1)}M';
+  } else if (number >= 1000) {
+    return '${(number / 1000).toStringAsFixed(1)}K';
+  } else {
+    return number.toString();
   }
 }

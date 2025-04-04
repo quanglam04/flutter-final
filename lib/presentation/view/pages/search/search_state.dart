@@ -8,17 +8,17 @@ class SearchState extends BaseState with _$SearchState {
     this.listTopic,
     this.listNewsItem,
     this.searchKey,
-    this.saveTopic,
-    this.followAuthor,
+    this.saveTopic = false,
+    this.followAuthor = false,
     this.listAuthors,
   });
 
   @override
   final String? searchKey;
   @override
-  final bool? saveTopic;
+  final bool saveTopic;
   @override
-  final bool? followAuthor;
+  final bool followAuthor;
   @override
   final List<NewsItem>? listNewsItem;
   @override

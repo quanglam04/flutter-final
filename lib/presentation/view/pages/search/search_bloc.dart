@@ -1,6 +1,8 @@
 import 'package:flutter_clean_architecture/domain/entities/author.dart';
 import 'package:flutter_clean_architecture/domain/entities/news.dart';
 import 'package:flutter_clean_architecture/domain/entities/topic.dart';
+import 'package:flutter_clean_architecture/domain/usecases/change_save_follower_use_case.dart';
+import 'package:flutter_clean_architecture/domain/usecases/change_save_topic_use_case.dart';
 import 'package:flutter_clean_architecture/domain/usecases/search_author_use_case.dart';
 import 'package:flutter_clean_architecture/domain/usecases/search_news_use_case.dart';
 import 'package:flutter_clean_architecture/domain/usecases/search_topics_use_case.dart';
@@ -19,13 +21,17 @@ part 'search_state.dart';
 
 @injectable
 class SearchBloc extends BaseBloc<SearchEvent, SearchState> {
+  final ChangeSaveFollowerUseCase _changeSaveFollowerUseCase;
+  final ChangeSaveTopicUseCase _changeSaveTopicUseCase;
   final SearchNewsUseCase _searchNewsUseCase;
   final SearchTopicsUseCase _searchTopicsUseCase;
   final SearchAuthorUseCase _searchAuthorUseCase;
   SearchBloc(
+    this._changeSaveTopicUseCase,
     this._searchNewsUseCase,
     this._searchTopicsUseCase,
     this._searchAuthorUseCase,
+    this._changeSaveFollowerUseCase,
   ) : super(const SearchState()) {
     on<SearchEvent>((event, emit) async {
       try {
@@ -62,10 +68,19 @@ class SearchBloc extends BaseBloc<SearchEvent, SearchState> {
             emit(state.copyWith(listAuthors: listAuthorsResult));
             break;
 
-          case _ChangeSaveTopic():
-            throw UnimplementedError();
-          case _ChangeFollowAuthor():
-            throw UnimplementedError();
+          case _ChangeSaveTopic(topicName: final topicName):
+            emit(state.copyWith(saveTopic: !state.saveTopic));
+            await _changeSaveTopicUseCase.call(
+              params: ChangeSaveTopicParam(topicName),
+
+              // final List<Topic> listTopicResult = await _getAllTopicUseCase.call(
+              //   params: GetAllTopicParam(state.searchKey ?? ''),
+            );
+          case _ChangeFollowAuthor(authorName: final authorName):
+            emit(state.copyWith(followAuthor: !state.followAuthor));
+            await _changeSaveFollowerUseCase.call(
+              params: ChangeSaveFollowerParam(authorName),
+            );
         }
       } catch (e, s) {
         handleError(emit, ErrorConverter.convert(e, s));
