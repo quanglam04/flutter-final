@@ -28,7 +28,7 @@ class HomePage extends BasePage<HomeBloc, HomeEvent, HomeState> {
     final colorSchema = context.themeOwn().colorSchema;
 
     final List<String> actions = [
-      "All",
+      'All',
       'Sport',
       'Politics',
       'Bussiness',

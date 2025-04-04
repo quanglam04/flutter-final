@@ -1,28 +1,29 @@
-import 'package:flutter/widgets.dart';
-import 'package:flutter_clean_architecture/domain/entities/topic.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_clean_architecture/domain/entities/author.dart';
 import 'package:flutter_clean_architecture/shared/extension/context.dart';
 import 'package:gap/gap.dart';
 
-class ListTopics extends StatefulWidget {
-  final List<Topic> listTopic;
-  ListTopics({super.key, required this.listTopic});
+class ListAuthor extends StatefulWidget {
+  final List<Author> listAuthor;
+  ListAuthor({super.key, required this.listAuthor});
+
   @override
-  State<ListTopics> createState() => _ListTopicsState();
+  State<ListAuthor> createState() => _ListAuthorState();
 }
 
-class _ListTopicsState extends State<ListTopics> {
+class _ListAuthorState extends State<ListAuthor> {
   @override
   Widget build(BuildContext context) {
     final textTheme = context.themeOwn().textTheme;
     final colorSchema = context.themeOwn().colorSchema;
     return ListView.builder(
-      padding: const EdgeInsets.only(right: 24, left: 24),
-      itemCount: widget.listTopic.length,
+      padding: EdgeInsets.only(right: 24, left: 24),
+      itemCount: widget.listAuthor.length,
       itemBuilder: (context, index) {
         return Column(
           children: [
             Container(
-              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 4.5),
+              padding: EdgeInsets.symmetric(vertical: 8, horizontal: 4.5),
               height: 86,
               child: Row(
                 children: [
@@ -30,9 +31,12 @@ class _ListTopicsState extends State<ListTopics> {
                     width: 70,
                     height: 70,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(6),
+                      shape:
+                          BoxShape
+                              .circle, // Thay đổi từ borderRadius thành shape: BoxShape.circle
+                      color: Colors.red, // Thêm màu nền đỏ giống logo BBC
                       image: DecorationImage(
-                        image: NetworkImage(widget.listTopic[index].imagePath),
+                        image: NetworkImage(widget.listAuthor[index].imagePath),
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -40,33 +44,36 @@ class _ListTopicsState extends State<ListTopics> {
                   const Gap(8),
                   Expanded(
                     child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          widget.listTopic[index].topicName,
+                          softWrap: true,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          widget.listAuthor[index].brandName,
                           style: textTheme?.textMedium?.copyWith(
                             color: colorSchema?.darkBlack,
                           ),
                         ),
-                        const Spacer(),
+                        Gap(4),
                         Text(
                           softWrap: true,
-                          maxLines: 2,
+                          maxLines: 1,
                           overflow: TextOverflow.ellipsis,
-                          widget.listTopic[index].description,
-                          style: textTheme?.textSmall?.copyWith(
-                            color: colorSchema?.grayscaleBodyText,
+                          widget.listAuthor[index].followers.toString(),
+                          style: textTheme?.textMedium?.copyWith(
+                            color: colorSchema?.darkBlack,
                           ),
                         ),
                       ],
                     ),
                   ),
-                  // const Gap(8),
+                  Gap(8),
                 ],
               ),
             ),
-            const Gap(15),
+            const Gap(16),
           ],
         );
       },

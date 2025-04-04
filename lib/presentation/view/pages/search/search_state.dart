@@ -10,6 +10,7 @@ class SearchState extends BaseState with _$SearchState {
     this.searchKey,
     this.saveTopic,
     this.followAuthor,
+    this.listAuthors,
   });
 
   @override
@@ -22,4 +23,6 @@ class SearchState extends BaseState with _$SearchState {
   final List<NewsItem>? listNewsItem;
   @override
   final List<Topic>? listTopic;
+  @override
+  final List<Author>? listAuthors;
 }

@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_clean_architecture/gen/assets.gen.dart';
 import 'package:flutter_clean_architecture/presentation/base/page_status.dart';
 import 'package:flutter_clean_architecture/presentation/view/widgets/app_form_field.dart';
+import 'package:flutter_clean_architecture/presentation/view/widgets/list_authors.dart';
 import 'package:flutter_clean_architecture/presentation/view/widgets/list_news.dart';
 import 'package:flutter_clean_architecture/presentation/view/widgets/list_topics.dart';
 import 'package:flutter_clean_architecture/shared/extension/context.dart';
@@ -28,7 +29,7 @@ class SearchPage extends BasePage<SearchBloc, SearchEvent, SearchState> {
     final textTheme = context.themeOwn().textTheme;
     final colorSchema = context.themeOwn().colorSchema;
     return DefaultTabController(
-      length: 2,
+      length: 3,
       child: SafeArea(
         child: Scaffold(
           body: Column(
@@ -55,10 +56,7 @@ class SearchPage extends BasePage<SearchBloc, SearchEvent, SearchState> {
                             ),
                             suffixIcon: InkWell(
                               onTap: () => context.pop(),
-                              child: Padding(
-                                padding: const EdgeInsets.only(right: 12),
-                                child: Assets.icons.clearAll.svg(),
-                              ),
+                              child: Assets.icons.clearAll.svg(),
                             ),
                           ),
                           onChanged:
@@ -75,7 +73,7 @@ class SearchPage extends BasePage<SearchBloc, SearchEvent, SearchState> {
               ),
               const Gap(16),
               SizedBox(
-                width: 178,
+                width: 210,
                 height: 34,
                 child: TabBar(
                   labelStyle: textTheme?.textMedium,
@@ -85,11 +83,11 @@ class SearchPage extends BasePage<SearchBloc, SearchEvent, SearchState> {
                   indicatorPadding: EdgeInsets.symmetric(vertical: -4),
                   unselectedLabelStyle: textTheme?.textMedium,
                   unselectedLabelColor: colorSchema?.grayscaleBodyText,
-                  labelPadding: EdgeInsets.zero,
+                  labelPadding: const EdgeInsets.symmetric(horizontal: 0),
                   tabs: const <Widget>[
                     Tab(text: 'News'),
                     Tab(text: 'Topics'),
-                    // Tab(text: 'Author'),
+                    Tab(text: 'Author'),
                   ],
                 ),
               ),
@@ -110,6 +108,7 @@ class SearchPage extends BasePage<SearchBloc, SearchEvent, SearchState> {
                       children: [
                         ListNewsItem(listNewsItem: state.listNewsItem ?? []),
                         ListTopics(listTopic: state.listTopic ?? []),
+                        ListAuthor(listAuthor: state.listAuthors ?? []),
                       ],
                     );
                   },
