@@ -1,6 +1,8 @@
 import 'package:flutter_clean_architecture/domain/entities/news.dart';
 import 'package:flutter_clean_architecture/domain/entities/topic.dart';
 import 'package:flutter_clean_architecture/domain/usecases/get_list_news_by_topic_use_case.dart';
+import 'package:flutter_clean_architecture/domain/usecases/search_news_use_case.dart';
+import 'package:flutter_clean_architecture/domain/usecases/search_topics_use_case.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 
@@ -18,16 +20,29 @@ part 'home_state.dart';
 class HomeBloc extends BaseBloc<HomeEvent, HomeState> {
   final GetListNewsByTopicUseCase _getListNewsByTopicUseCase;
   final GetListTopicSavedUseCase _getListTopicSavedUseCase;
-  HomeBloc(this._getListNewsByTopicUseCase, this._getListTopicSavedUseCase)
-    : super(const HomeState(listTopics: [])) {
+  final SearchTopicsUseCase _searchTopicsUseCase;
+  final SearchNewsUseCase _searchNewsUseCase;
+  HomeBloc(
+    this._getListNewsByTopicUseCase,
+    this._getListTopicSavedUseCase,
+    this._searchNewsUseCase,
+    this._searchTopicsUseCase,
+  ) : super(const HomeState(listTopics: [])) {
     on<HomeEvent>((event, emit) async {
       try {
         switch (event) {
           case _LoadData():
-            final List<Topic> topicResult = await _getListTopicSavedUseCase
-                .call(params: GetListTopicSavedParam());
+            emit(state.copyWith(pageStatus: PageStatus.Loaded));
+            final List<Topic> listTopics = await _searchTopicsUseCase.call(
+              params: SearchTopicsParam(''),
+            );
 
-            emit(state.copyWith(listTopics: topicResult));
+            emit(state.copyWith(listTopics: listTopics));
+
+            final List<NewsItem> listNewsResult = await _searchNewsUseCase.call(
+              params: SearchNewsParam(''),
+            );
+            emit(state.copyWith(listNews: listNewsResult));
             break;
           case _ChangTab(topic: final topic):
             final List<NewsItem> newsResult = await _getListNewsByTopicUseCase

@@ -49,9 +49,21 @@ class TopicRepositoryImpl implements TopicRepository {
       true,
     ),
     Topic(
+      'https://file3.qdnd.vn/data/images/0/2021/11/21/nguyenthao/fake_news.jpg?dpi=150&quality=100&w=870',
+      'Entertainment',
+      'Tin tức giải trí bao gồm phim ảnh, âm nhạc, người nổi tiếng và các sự kiện văn hóa.',
+      false,
+    ),
+    Topic(
       'https://plus.unsplash.com/premium_photo-1682125773446-259ce64f9dd7?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8ZWR1Y2F0aW9ufGVufDB8fDB8fHww',
       'Bussiness',
       'Tin tức kinh doanh cập nhật thông tin về các công ty lớn, chiến lược phát triển và những thương vụ đầu tư đáng chú ý trên thị trường.',
+      false,
+    ),
+    Topic(
+      'https://aten.edu.vn/wp-content/uploads/2023/07/hinh-anh-news-la-danh-tu-dem-duoc-hay-khong-dem-duoc-so-1.jpg',
+      'Food',
+      'Khám phá ẩm thực, các công thức nấu ăn và xu hướng ẩm thực trên thế giới.',
       false,
     ),
     Topic(
@@ -67,21 +79,21 @@ class TopicRepositoryImpl implements TopicRepository {
       false,
     ),
     Topic(
-      'https://media.istockphoto.com/id/1081422898/photo/pan-fried-duck.jpg?s=612x612&w=0&k=20&c=kzlrX7KJivvufQx9mLd-gMiMHR6lC2cgX009k9XO6VA=',
-      'Culinary',
-      'Tin tức ẩm thực cập nhật các nhà hàng mới, xu hướng dinh dưỡng và những đổi mới trong nghệ thuật nấu nướng trên toàn thế giới.',
-      true,
+      'https://play-lh.googleusercontent.com/_ahCmEdTn8h5omlAg0jg9Y15KArlptm4qcbnyWSzGU-jM4mR1LeArqbMM7DzgZjNywO2',
+      'Technology',
+      'Tin tức công nghệ về AI, blockchain, smartphone và các phát minh kỹ thuật số hiện đại.',
+      false,
     ),
     Topic(
-      'https://media.istockphoto.com/id/1081422898/photo/pan-fried-duck.jpg?s=612x612&w=0&k=20&c=kzlrX7KJivvufQx9mLd-gMiMHR6lC2cgX009k9XO6VA=',
+      'https://file3.qdnd.vn/data/images/0/2021/11/21/nguyenthao/fake_news.jpg?dpi=150&quality=100&w=870',
       'Science',
-      'Tin tức khoa học cập nhật các khám phá mới, nghiên cứu đột phá và ứng dụng công nghệ tiên tiến trong nhiều lĩnh vực khác nhau.',
+      'Cập nhật những tiến bộ khoa học mới nhất, khám phá vũ trụ và các nghiên cứu tiên tiến.',
       true,
     ),
     Topic(
-      'https://media.istockphoto.com/id/1081422898/photo/pan-fried-duck.jpg?s=612x612&w=0&k=20&c=kzlrX7KJivvufQx9mLd-gMiMHR6lC2cgX009k9XO6VA=',
+      'https://aten.edu.vn/wp-content/uploads/2023/07/hinh-anh-news-la-danh-tu-dem-duoc-hay-khong-dem-duoc-so-1.jpg',
       'Fashion',
-      'Tin tức thời trang cập nhật các bộ sưu tập mới, xu hướng mùa và những thiết kế nổi bật từ các thương hiệu hàng đầu thế giới.',
+      'Tin tức thời trang với các xu hướng mới nhất, phong cách thiết kế và sự kiện thời trang nổi bật.',
       true,
     ),
   ];
