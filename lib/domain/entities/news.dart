@@ -1,3 +1,7 @@
+import 'package:json_annotation/json_annotation.dart';
+part 'news.g.dart';
+
+@JsonSerializable()
 class NewsItem {
   final String title;
   final String source;
