@@ -3,6 +3,7 @@ import 'package:flutter/material.dart' hide Notification;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_clean_architecture/domain/entities/notification.dart';
 import 'package:flutter_clean_architecture/gen/assets.gen.dart';
+import 'package:flutter_clean_architecture/presentation/router/router.dart';
 import 'package:flutter_clean_architecture/shared/extension/context.dart';
 import 'package:flutter_clean_architecture/shared/extension/datetime.dart';
 import 'package:gap/gap.dart';
@@ -51,7 +52,12 @@ class NotificationPage
                   itemBuilder:
                       (context) => [
                         PopupMenuItem(value: 'Setting', child: Text('Setting')),
-                        PopupMenuItem(value: 'Logout', child: Text('Logout')),
+                        PopupMenuItem(
+                          value: 'Logout',
+                          child: Text('Logout'),
+                          onTap:
+                              () => context.router.replaceAll([LoginRoute()]),
+                        ),
                       ],
                 ),
               ),
