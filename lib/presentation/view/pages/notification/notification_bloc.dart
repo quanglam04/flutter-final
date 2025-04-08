@@ -51,7 +51,7 @@ class NotificationBloc extends BaseBloc<NotificationEvent, NotificationState> {
             await _markAsReadNotificationUseCase.call(
               params: MarkAsReadNotificationParam(notificationId),
             );
-            emit(state.copyWith(isRead: true));
+            emit(state.copyWith(isRead: !state.isRead));
             break;
         }
       } catch (e, s) {
