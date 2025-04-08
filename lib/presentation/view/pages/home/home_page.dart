@@ -57,7 +57,7 @@ class HomePage extends BasePage<HomeBloc, HomeEvent, HomeState> {
                           child: Assets.images.logoSvg.svg(),
                         ),
                         InkWell(
-                          onTap: () {},
+                          onTap: () => context.pushRoute(NotificationRoute()),
                           child: Container(
                             width: 32,
                             height: 32,

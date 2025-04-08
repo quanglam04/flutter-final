@@ -69,15 +69,15 @@ extension DateTimeExtensions on DateTime {
       month < 12 ? DateTime(year, month + 1, 0) : DateTime(year + 1, 1, 0);
 
   DateTime addMonth(int step) => DateTime(
-        year,
-        month + step,
-        day,
-        hour,
-        minute,
-        second,
-        millisecond,
-        microsecond,
-      );
+    year,
+    month + step,
+    day,
+    hour,
+    minute,
+    second,
+    millisecond,
+    microsecond,
+  );
 
   DateTime zeroTime() => DateTime(year, month, day);
 
@@ -96,10 +96,7 @@ extension DateTimeExtensions on DateTime {
     return isAtSameMomentAs | date.isBefore(dateTime);
   }
 
-  bool isBetween(
-    DateTime fromDateTime,
-    DateTime toDateTime,
-  ) {
+  bool isBetween(DateTime fromDateTime, DateTime toDateTime) {
     final date = this;
     final isAfter = date.isAfterOrEqualTo(fromDateTime);
     final isBefore = date.isBeforeOrEqualTo(toDateTime);
@@ -147,14 +144,31 @@ extension DateOnlyCompare on DateTime {
 
 extension DateTimeRangeExtensions on DateTimeRange {
   int get dayWorkDuration => () {
-        int day = 0;
-        DateTime currentDate = start;
-        while (currentDate.isBeforeOrEqualTo(end)) {
-          if (currentDate.isWeekDay()) {
-            day = day + 1;
-          }
-          currentDate = currentDate.add(const Duration(days: 1));
-        }
-        return day;
-      }();
+    int day = 0;
+    DateTime currentDate = start;
+    while (currentDate.isBeforeOrEqualTo(end)) {
+      if (currentDate.isWeekDay()) {
+        day = day + 1;
+      }
+      currentDate = currentDate.add(const Duration(days: 1));
+    }
+    return day;
+  }();
+}
+
+extension DayAGo on DateTime {
+  String getDayAgo() {
+    {
+      final duration = DateTime.now().difference(this);
+      if (duration.inDays >= 1) {
+        return '${duration.inDays}d ago';
+      } else if (duration.inHours >= 1) {
+        return '${duration.inHours}h ago';
+      } else if (duration.inMinutes >= 1) {
+        return '${duration.inMinutes}m ago';
+      } else {
+        return 'Just now';
+      }
+    }
+  }
 }

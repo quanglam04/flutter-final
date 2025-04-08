@@ -1,8 +1,10 @@
 import 'package:equatable/equatable.dart';
+import 'package:json_annotation/json_annotation.dart';
 import 'package:uuid/uuid.dart';
+part 'task.g.dart';
 
+@JsonSerializable()
 class Task extends Equatable {
-
   const Task({
     required this.id,
     required this.title,
