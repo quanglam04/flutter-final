@@ -42,7 +42,7 @@ class NotificationRepositoryImpl extends NotificationRepository {
       final Notification notification = _Notifications.firstWhere(
         (notification) => notification.notificationId == notificationId,
       );
-      notification.isRead = true;
+      notification.isRead = !notification.isRead;
       return true;
     } catch (e) {
       throw BusinessErrorEntityData(
@@ -55,17 +55,17 @@ class NotificationRepositoryImpl extends NotificationRepository {
   static final List<Notification> _Notifications = [
     Notification(
       '2',
-      'https://file3.qdnd.vn/data/images/0/2021/11/21/nguyenthao/fake_news.jpg?dpi=150&quality=100&w=870',
-      Author('15', '', ',\'User15', 0, true),
-      'đã thích bài viết của bạn đã chia sẻ bài viết đã chia sẻ bài viết đã chia sẻ bài viết đã chia sẻ bài viết đã chia sẻ bài viết đã chia sẻ bài viết',
+      'https://avatars.githubusercontent.com/u/119520066?v=4',
+      Author('15', '', 'Lâm', 0, true),
+      'đã thích bài viết của bạn',
       DateTime(2025, 3, 27, 12, 35),
       'like',
       false,
     ),
     Notification(
       '3',
-      'https://photo.znews.vn/w660/Uploaded/mdf_eioxrd/2021_07_06/2.jpg',
-      Author('16', '', 'Author16', 0, false),
+      'https://avatars.githubusercontent.com/u/119520066?v=4',
+      Author('16', '', 'Lâm', 0, false),
       'đã follow bạn',
       DateTime(2025, 3, 20, 23, 50),
       'follow',
@@ -73,17 +73,17 @@ class NotificationRepositoryImpl extends NotificationRepository {
     ),
     Notification(
       '4',
-      'https://img.lovepik.com/photo/50051/4826.jpg_wh860.jpg',
-      Author('14', '', 'Author14', 0, false),
-      'đã chia sẻ bài viết',
+      'https://i.pinimg.com/736x/8f/1c/a2/8f1ca2029e2efceebd22fa05cca423d7.jpg',
+      Author('14', '', 'Quang Lâm', 0, false),
+      'đã chia sẻ bài viết của bạn',
       DateTime(2025, 3, 26, 9, 20),
       'share',
       false,
     ),
     Notification(
       '5',
-      'https://file3.qdnd.vn/data/images/0/2021/11/21/nguyenthao/fake_news.jpg?dpi=150&quality=100&w=870',
-      Author('15', '', 'Author15', 0, true),
+      'https://diendandatdai.com/wp-content/uploads/2024/10/avatar-fb-mac-dinh-60sNprK5.jpg',
+      Author('15', '', 'Hải', 0, true),
       'đã thích bài viết của bạn',
       DateTime(2025, 3, 26, 12, 35),
       'like',
@@ -91,8 +91,8 @@ class NotificationRepositoryImpl extends NotificationRepository {
     ),
     Notification(
       '7',
-      'https://file3.qdnd.vn/data/images/0/2021/11/21/nguyenthao/fake_news.jpg?dpi=150&quality=100&w=870',
-      Author('Alice', '', 'Alice', 0, true),
+      'https://img.freepik.com/free-psd/3d-render-avatar-character_23-2150611765.jpg',
+      Author('Alice', '', 'Pi tơ', 0, true),
       'đã follow bạn',
       DateTime(2025, 3, 25, 7, 55),
       'follow',
@@ -118,8 +118,8 @@ class NotificationRepositoryImpl extends NotificationRepository {
     ),
     Notification(
       '10',
-      'https://file3.qdnd.vn/data/images/0/2021/11/21/nguyenthao/fake_news.jpg?dpi=150&quality=100&w=870',
-      Author('David', '', 'David', 0, false),
+      'https://avatars.githubusercontent.com/u/119520066?v=4',
+      Author('David', '', 'Nam', 0, false),
       'đã chia sẻ bài viết của bạn',
       DateTime(2025, 3, 24, 15, 20),
       'share',
