@@ -52,15 +52,18 @@ class NotificationPage
                   onSelected: (x) {},
                   itemBuilder:
                       (context) => [
-                        PopupMenuItem(value: 'Setting', child: Text('Setting')),
+                        const PopupMenuItem(
+                          value: 'Setting',
+                          child: Text('Setting'),
+                        ),
                         PopupMenuItem(
                           value: 'Logout',
-                          child: Text('Logout'),
+                          child: const Text('Logout'),
                           onTap: () async {
                             final GoogleSignIn googleSignIn = GoogleSignIn();
                             await googleSignIn.signOut();
 
-                            context.router.replaceAll([LoginRoute()]);
+                            context.router.replaceAll([const LoginRoute()]);
                           },
                         ),
                       ],

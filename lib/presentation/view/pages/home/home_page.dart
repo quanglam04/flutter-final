@@ -363,30 +363,30 @@ class HomePage extends BasePage<HomeBloc, HomeEvent, HomeState> {
               ),
             ),
 
-            bottomNavigationBar: BottomNavigationBar(
-              items: [
-                BottomNavigationBarItem(
-                  icon: Assets.icons.home.svg(),
-                  label: 'Home',
-                ),
-                BottomNavigationBarItem(
-                  icon: Assets.icons.explorerIcon.svg(),
-                  label: 'Explore',
-                ),
-                BottomNavigationBarItem(
-                  icon: Assets.icons.bookmark.svg(),
-                  label: 'Bookmark',
-                ),
-                BottomNavigationBarItem(
-                  icon: Assets.icons.profile.svg(),
-                  label: 'Profile',
-                ),
-              ],
-              currentIndex: 0,
-              selectedItemColor: colorSchema?.primary,
-              unselectedItemColor: colorSchema?.grayscaleBodyText,
-              type: BottomNavigationBarType.fixed,
-            ),
+            // bottomNavigationBar: BottomNavigationBar(
+            //   items: [
+            //     BottomNavigationBarItem(
+            //       icon: Assets.icons.home.svg(),
+            //       label: 'Home',
+            //     ),
+            //     BottomNavigationBarItem(
+            //       icon: Assets.icons.explorerIcon.svg(),
+            //       label: 'Explore',
+            //     ),
+            //     BottomNavigationBarItem(
+            //       icon: Assets.icons.bookmark.svg(),
+            //       label: 'Bookmark',
+            //     ),
+            //     BottomNavigationBarItem(
+            //       icon: Assets.icons.profile.svg(),
+            //       label: 'Profile',
+            //     ),
+            //   ],
+            //   currentIndex: 0,
+            //   selectedItemColor: colorSchema?.primary,
+            //   unselectedItemColor: colorSchema?.grayscaleBodyText,
+            //   type: BottomNavigationBarType.fixed,
+            // ),
           ),
         );
       },
