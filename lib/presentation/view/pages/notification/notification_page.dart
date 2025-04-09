@@ -7,6 +7,7 @@ import 'package:flutter_clean_architecture/presentation/router/router.dart';
 import 'package:flutter_clean_architecture/shared/extension/context.dart';
 import 'package:flutter_clean_architecture/shared/extension/datetime.dart';
 import 'package:gap/gap.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 import '../../../base/base_page.dart';
 import 'notification_bloc.dart';
@@ -51,12 +52,19 @@ class NotificationPage
                   onSelected: (x) {},
                   itemBuilder:
                       (context) => [
-                        PopupMenuItem(value: 'Setting', child: Text('Setting')),
+                        const PopupMenuItem(
+                          value: 'Setting',
+                          child: Text('Setting'),
+                        ),
                         PopupMenuItem(
                           value: 'Logout',
-                          child: Text('Logout'),
-                          onTap:
-                              () => context.router.replaceAll([LoginRoute()]),
+                          child: const Text('Logout'),
+                          onTap: () async {
+                            final GoogleSignIn googleSignIn = GoogleSignIn();
+                            await googleSignIn.signOut();
+
+                            context.router.replaceAll([const LoginRoute()]);
+                          },
                         ),
                       ],
                 ),
