@@ -1,4 +1,6 @@
 import 'package:auto_route/auto_route.dart';
+
+import '../view/pages/setting/setting_page.dart';
 import 'package:flutter_clean_architecture/presentation/view/pages/navigation/navigation_page.dart';
 import 'package:flutter_clean_architecture/presentation/view/pages/splash/splash_page.dart';
 import '../view/pages/explore/explore_page.dart';
@@ -35,5 +37,6 @@ class AppRouter extends RootStackRouter {
       ],
     ),
     AutoRoute(page: NotificationRoute.page),
+    AutoRoute(page: SettingRoute.page),
   ];
 }
