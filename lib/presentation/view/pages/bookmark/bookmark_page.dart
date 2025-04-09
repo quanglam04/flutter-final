@@ -6,7 +6,8 @@ import '../../../base/base_page.dart';
 import 'bookmark_bloc.dart';
 
 @RoutePage()
-class BookmarkPage extends BasePage<BookmarkBloc, BookmarkEvent, BookmarkState> {
+class BookmarkPage
+    extends BasePage<BookmarkBloc, BookmarkEvent, BookmarkState> {
   const BookmarkPage({Key? key}) : super(key: key);
 
   @override
@@ -17,6 +18,9 @@ class BookmarkPage extends BasePage<BookmarkBloc, BookmarkEvent, BookmarkState> 
 
   @override
   Widget builder(BuildContext context) {
-    return const SizedBox();
+    return Scaffold(
+      appBar: AppBar(title: const Text('Màn hình Bookmark')),
+      body: const Center(child: Text('màn hình Bookmark')),
+    );
   }
 }

@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_clean_architecture/gen/assets.gen.dart';
+import 'package:flutter_clean_architecture/presentation/router/router.dart';
 import 'package:flutter_clean_architecture/presentation/view/widgets/app_button.dart';
 import 'package:flutter_clean_architecture/presentation/view/widgets/list_news.dart';
 import 'package:flutter_clean_architecture/shared/extension/context.dart';
@@ -39,7 +40,9 @@ class ProfilePage extends BasePage<ProfileBloc, ProfileEvent, ProfileState> {
             ),
             actions: [
               InkWell(
-                onTap: () {},
+                onTap: () {
+                  context.pushRoute(SettingRoute());
+                },
                 child: Padding(
                   padding: const EdgeInsets.only(right: 24),
                   child: Assets.icons.settingIcon.svg(color: iconColor),

@@ -17,6 +17,9 @@ class ExplorePage extends BasePage<ExploreBloc, ExploreEvent, ExploreState> {
 
   @override
   Widget builder(BuildContext context) {
-    return const SizedBox();
+    return Scaffold(
+      appBar: AppBar(title: Text('Màn hình Explore')),
+      body: const Center(child: Text("Màn hình Explore")),
+    );
   }
 }
