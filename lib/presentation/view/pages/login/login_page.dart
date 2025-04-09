@@ -190,7 +190,7 @@ class LoginPage extends BasePage<LoginBloc, LoginEvent, LoginState> {
                           if (googleUser != null) {
                             logger.d("$googleUser");
                             logger.d("login successsssssssssssss");
-                            context.pushRoute(HomeRoute());
+                            context.pushRoute(const NavigationRoute());
                           } else {
                             print("login failed");
                           }

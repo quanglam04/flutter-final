@@ -10,6 +10,7 @@ class NewsItem {
   final String category;
   final String topic;
   final String author;
+  final String description;
 
   NewsItem({
     required this.topic,
@@ -19,6 +20,7 @@ class NewsItem {
     required this.imageUrl,
     required this.category,
     required this.author,
+    required this.description,
   });
 
   @override

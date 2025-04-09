@@ -21,13 +21,12 @@ class AppRouter extends RootStackRouter {
   @override
   final List<AutoRoute> routes = [
     //AutoRoute(page: HomeRoute.page),
-    AutoRoute(page: LoginRoute.page),
+    AutoRoute(page: LoginRoute.page, initial: true),
     AutoRoute(page: SearchRoute.page),
     AutoRoute(page: HelloRoute.page),
     //AutoRoute(page: ProfileRoute.page),
     AutoRoute(
       page: NavigationRoute.page,
-      initial: true,
       children: [
         AutoRoute(page: HomeRoute.page),
         AutoRoute(page: ProfileRoute.page),
