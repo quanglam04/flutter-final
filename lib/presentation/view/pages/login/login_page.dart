@@ -1,6 +1,9 @@
+import 'dart:convert';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_clean_architecture/domain/entities/user.dart';
 import 'package:flutter_clean_architecture/gen/assets.gen.dart';
 import 'package:flutter_clean_architecture/presentation/router/router.dart';
 import 'package:flutter_clean_architecture/presentation/view/widgets/app_button.dart';
@@ -8,6 +11,7 @@ import 'package:flutter_clean_architecture/presentation/view/widgets/app_form_fi
 import 'package:flutter_clean_architecture/shared/extension/context.dart';
 import 'package:flutter_clean_architecture/shared/utils/logger.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../base/base_page.dart';
 import 'login_bloc.dart';
@@ -147,7 +151,7 @@ class LoginPage extends BasePage<LoginBloc, LoginEvent, LoginState> {
                 titleStyle: textTheme?.textMedium,
                 onPressed: () => context.pushRoute(HomeRoute()),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               Align(
                 alignment: Alignment.center,
                 child: Text(
@@ -157,7 +161,7 @@ class LoginPage extends BasePage<LoginBloc, LoginEvent, LoginState> {
                   ),
                 ),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -188,6 +192,17 @@ class LoginPage extends BasePage<LoginBloc, LoginEvent, LoginState> {
                               await _googleSignIn.signIn();
 
                           if (googleUser != null) {
+                            CurrentUser user = new CurrentUser(
+                              googleUser.id,
+                              googleUser.displayName ?? '',
+                              googleUser.photoUrl ?? '',
+                              googleUser.email.split('@')[0],
+                              googleUser.email,
+                              '0971624914',
+                              'trinhquanglam.com',
+                              'trinhquanglam.bio.com',
+                            );
+                            await saveUserToLocal(user);
                             logger.d("$googleUser");
                             logger.d("login successsssssssssssss");
                             context.pushRoute(const NavigationRoute());
@@ -227,4 +242,21 @@ class LoginPage extends BasePage<LoginBloc, LoginEvent, LoginState> {
       ),
     );
   }
+}
+
+Future<void> saveUserToLocal(CurrentUser user) async {
+  final prefs = await SharedPreferences.getInstance();
+  final userMap = {
+    'id': user.id,
+    'fullName': user.fullName,
+    'imgPath': user.imagePath,
+    'email': user.email,
+    'username': user.username,
+    'phoneNumber': user.phoneNumber,
+    'bio': user.bio,
+    'website': user.website,
+  };
+
+  final jsonString = jsonEncode(userMap);
+  await prefs.setString('user_data', jsonString);
 }

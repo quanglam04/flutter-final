@@ -172,7 +172,11 @@ class ProfilePage extends BasePage<ProfileBloc, ProfileEvent, ProfileState> {
                                   Expanded(
                                     child: AppButton.primary(
                                       title: 'Edit Profile',
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        context.pushRoute(
+                                          const EditProfileRoute(),
+                                        );
+                                      },
                                       height: 50,
                                       backgroundColor:
                                           colorSchema?.primaryDefault,

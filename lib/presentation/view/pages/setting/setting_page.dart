@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_clean_architecture/gen/assets.gen.dart';
+import 'package:flutter_clean_architecture/presentation/router/router.dart';
 import 'package:flutter_clean_architecture/shared/extension/context.dart';
 import 'package:gap/gap.dart';
 
@@ -92,7 +93,7 @@ class SettingPage extends BasePage<SettingBloc, SettingEvent, SettingState> {
                   Assets.icons.settingIcon4.svg(),
                   Gap(4),
                   Text(
-                    'Help',
+                    'Dark Mode',
                     style: textTheme?.textMedium?.copyWith(
                       color: colorSchema?.darkBlack,
                     ),
@@ -106,11 +107,15 @@ class SettingPage extends BasePage<SettingBloc, SettingEvent, SettingState> {
                 children: [
                   Assets.icons.settingIcon5.svg(),
                   Gap(4),
-                  Text(
-                    'Logout',
-                    style: textTheme?.textMedium?.copyWith(
-                      color: colorSchema?.darkBlack,
+                  InkWell(
+                    child: Text(
+                      'Logout',
+                      style: textTheme?.textMedium?.copyWith(
+                        color: colorSchema?.darkBlack,
+                      ),
                     ),
+                    onTap:
+                        () => context.router.replaceAll([const LoginRoute()]),
                   ),
                 ],
               ),
