@@ -53,18 +53,72 @@ class EditProfilePage
               child: InkWell(
                 child: Assets.icons.ok.svg(),
                 onTap: () {
+                  final username = usernameController.text.trim();
+                  final fullName = fullNameController.text.trim();
+                  final email = emailController.text.trim();
+                  final phone = phoneController.text.trim();
+
+                  if (username.isEmpty ||
+                      fullName.isEmpty ||
+                      email.isEmpty ||
+                      phone.isEmpty) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text(
+                          'Vui lòng điền đầy đủ các thông tin',
+                          style: TextStyle(fontSize: 30),
+                        ),
+                        backgroundColor: Colors.red,
+                      ),
+                    );
+                    return;
+                  }
+
+                  // dùng regex kiểm tra email và phone
+                  final emailRegex = RegExp(
+                    r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$',
+                  );
+                  final phoneRegex = RegExp(r'^\d{9,15}$');
+
+                  if (!emailRegex.hasMatch(email)) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text(
+                          'Email không hợp lệ',
+                          style: TextStyle(fontSize: 30),
+                        ),
+                        backgroundColor: Colors.red,
+                      ),
+                    );
+                    return;
+                  }
+
+                  if (!phoneRegex.hasMatch(phone)) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text(
+                          'Số điện thoại không hợp lệ',
+                          style: TextStyle(fontSize: 30),
+                        ),
+                        backgroundColor: Colors.red,
+                      ),
+                    );
+                    return;
+                  }
+
+                  // Gửi event đến Bloc
                   context.read<EditProfileBloc>().add(
                     EditProfileEvent.saveProfile(
-                      username: usernameController.text,
-                      fullName: fullNameController.text,
-                      email: emailController.text,
-                      phoneNumber: phoneController.text,
-                      bio: bioController.text,
-                      website: websiteController.text,
+                      username: username,
+                      fullName: fullName,
+                      email: email,
+                      phoneNumber: phone,
+                      bio: bioController.text.trim(),
+                      website: websiteController.text.trim(),
                     ),
                   );
 
-                  context.pop(); // Đóng màn hình sau khi lưu
+                  context.pop();
                 },
               ),
             ),
