@@ -22,6 +22,12 @@ class EditProfilePage
 
   @override
   Widget builder(BuildContext context) {
+    final usernameController = TextEditingController();
+    final fullNameController = TextEditingController();
+    final emailController = TextEditingController();
+    final phoneController = TextEditingController();
+    final bioController = TextEditingController();
+    final websiteController = TextEditingController();
     final textTheme = context.themeOwn().textTheme;
     final colorSchema = context.themeOwn().colorSchema;
     final iconColor = Theme.of(context).iconTheme.color;
@@ -44,7 +50,23 @@ class EditProfilePage
           actions: [
             Padding(
               padding: const EdgeInsets.only(right: 24),
-              child: InkWell(child: Assets.icons.ok.svg(), onTap: context.pop),
+              child: InkWell(
+                child: Assets.icons.ok.svg(),
+                onTap: () {
+                  context.read<EditProfileBloc>().add(
+                    EditProfileEvent.saveProfile(
+                      username: usernameController.text,
+                      fullName: fullNameController.text,
+                      email: emailController.text,
+                      phoneNumber: phoneController.text,
+                      bio: bioController.text,
+                      website: websiteController.text,
+                    ),
+                  );
+
+                  context.pop(); // Đóng màn hình sau khi lưu
+                },
+              ),
             ),
           ],
         ),
@@ -84,34 +106,42 @@ class EditProfilePage
                     if (user == null) {
                       return const Center(child: CircularProgressIndicator());
                     }
-
+                    usernameController.text = user.username;
+                    fullNameController.text = user.fullName ?? '';
+                    emailController.text = user.email;
+                    phoneController.text = user.phoneNumber;
+                    bioController.text = user.bio ?? '';
+                    websiteController.text = user.website ?? '';
                     return Column(
                       children: [
                         const Gap(16),
-                        AppFormField(label: 'Username', value: user.username),
+                        AppFormField(
+                          label: 'Username',
+                          controller: usernameController,
+                        ),
                         const Gap(16),
                         AppFormField(
                           label: 'Full name',
-                          value: user.fullName ?? '',
+                          controller: fullNameController,
                         ),
                         const Gap(16),
                         AppFormField(
                           label: 'Email Address',
                           required: true,
-                          value: user.email,
+                          controller: emailController,
                         ),
                         const Gap(16),
                         AppFormField(
                           label: 'Phone number',
                           required: true,
-                          value: user.phoneNumber,
+                          controller: phoneController,
                         ),
                         const Gap(16),
-                        AppFormField(label: 'Bio', value: user.bio ?? ''),
+                        AppFormField(label: 'Bio', controller: bioController),
                         const Gap(16),
                         AppFormField(
                           label: 'Website',
-                          value: user.website ?? '',
+                          controller: websiteController,
                         ),
                       ],
                     );

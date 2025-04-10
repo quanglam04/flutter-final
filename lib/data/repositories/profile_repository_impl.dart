@@ -32,4 +32,22 @@ class ProfileRepositoryImpl extends ProfileRepository {
     }
     return null;
   }
+
+  @override
+  Future<void> saveUserToLocal(CurrentUser user) async {
+    final prefs = await SharedPreferences.getInstance();
+    final userMap = {
+      'id': user.id,
+      'fullName': user.fullName,
+      'imgPath': user.imagePath,
+      'email': user.email,
+      'username': user.username,
+      'phoneNumber': user.phoneNumber,
+      'bio': user.bio,
+      'website': user.website,
+    };
+
+    final jsonString = jsonEncode(userMap);
+    await prefs.setString('user_data', jsonString);
+  }
 }
