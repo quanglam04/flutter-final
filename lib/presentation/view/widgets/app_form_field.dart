@@ -115,7 +115,30 @@ class _AppFormFieldState extends State<AppFormField> {
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
+
       children: [
+        if (widget.label != null) ...[
+          Row(
+            children: [
+              Text(
+                widget.label!,
+                style: textTheme?.textSmall?.copyWith(
+                  color:
+                      colorSchema?.grayscaleBodyText ??
+                      AppColors.grayscaleBodyText,
+                ),
+              ),
+              if (widget.required)
+                Text(
+                  "*",
+                  style: textTheme?.textSmall?.copyWith(
+                    color: colorSchema?.errorDark ?? AppColors.errorDark,
+                  ),
+                ),
+            ],
+          ),
+          const Gap(8),
+        ],
         Container(
           child: TextFormField(
             obscuringCharacter: '*',
