@@ -2,7 +2,9 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_clean_architecture/gen/assets.gen.dart';
+import 'package:flutter_clean_architecture/presentation/view/widgets/app_form_field.dart';
 import 'package:flutter_clean_architecture/shared/extension/context.dart';
+import 'package:gap/gap.dart';
 
 import '../../../base/base_page.dart';
 import 'edit_profile_bloc.dart';
@@ -42,7 +44,7 @@ class EditProfilePage
           actions: [
             Padding(
               padding: const EdgeInsets.only(right: 24),
-              child: Assets.icons.ok.svg(),
+              child: InkWell(child: Assets.icons.ok.svg(), onTap: context.pop),
             ),
           ],
         ),
@@ -71,6 +73,49 @@ class EditProfilePage
                       ),
                     ],
                   ),
+                ),
+                BlocBuilder<EditProfileBloc, EditProfileState>(
+                  buildWhen: (preState, state) {
+                    return preState.currentUser != state.currentUser;
+                  },
+                  builder: (context, state) {
+                    final user = state.currentUser;
+
+                    if (user == null) {
+                      return const Center(child: CircularProgressIndicator());
+                    }
+
+                    return Column(
+                      children: [
+                        const Gap(16),
+                        AppFormField(label: 'Username', value: user.username),
+                        const Gap(16),
+                        AppFormField(
+                          label: 'Full name',
+                          value: user.fullName ?? '',
+                        ),
+                        const Gap(16),
+                        AppFormField(
+                          label: 'Email Address',
+                          required: true,
+                          value: user.email,
+                        ),
+                        const Gap(16),
+                        AppFormField(
+                          label: 'Phone number',
+                          required: true,
+                          value: user.phoneNumber,
+                        ),
+                        const Gap(16),
+                        AppFormField(label: 'Bio', value: user.bio ?? ''),
+                        const Gap(16),
+                        AppFormField(
+                          label: 'Website',
+                          value: user.website ?? '',
+                        ),
+                      ],
+                    );
+                  },
                 ),
               ],
             ),

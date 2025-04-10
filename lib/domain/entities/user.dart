@@ -15,14 +15,24 @@ class CurrentUser {
     this.website,
   );
 
-  final String id;
-  final String? imagePath;
-  final String? fullName;
-  final String username;
-  final String email;
-  final String phoneNumber;
-  final String? bio;
-  final String? website;
+  String id;
+  String? imagePath;
+  String? fullName;
+  String username;
+  String email;
+  String phoneNumber;
+  String? bio;
+  String? website;
+
+  // Setters
+  void setId(String value) => id = value;
+  void setImagePath(String? value) => imagePath = value;
+  void setFullName(String? value) => fullName = value;
+  void setUsername(String value) => username = value;
+  void setEmail(String value) => email = value;
+  void setPhoneNumber(String value) => phoneNumber = value;
+  void setBio(String? value) => bio = value;
+  void setWebsite(String? value) => website = value;
 
   factory CurrentUser.fromJson(Map<String, dynamic> json) =>
       _$CurrentUserFromJson(json);
