@@ -1,6 +1,8 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_clean_architecture/domain/entities/news.dart';
 import 'package:flutter_clean_architecture/gen/assets.gen.dart';
+import 'package:flutter_clean_architecture/presentation/router/router.dart';
 import 'package:flutter_clean_architecture/shared/extension/context.dart';
 import 'package:gap/gap.dart';
 
@@ -13,6 +15,9 @@ class News extends StatelessWidget {
     final textTheme = context.themeOwn().textTheme;
     final colorSchema = context.themeOwn().colorSchema;
     return InkWell(
+      onTap: () {
+        context.pushRoute(DetailRoute(id: newsItem.id));
+      },
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24),
         child: Column(
