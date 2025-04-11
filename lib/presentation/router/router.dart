@@ -1,4 +1,9 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/foundation.dart';
+
+import '../view/pages/comment/comment_page.dart';
+
+import '../view/pages/detail/detail_page.dart';
 
 import '../view/pages/edit_profile/edit_profile_page.dart';
 
@@ -41,5 +46,7 @@ class AppRouter extends RootStackRouter {
     AutoRoute(page: NotificationRoute.page),
     AutoRoute(page: SettingRoute.page),
     AutoRoute(page: EditProfileRoute.page),
+    AutoRoute(page: DetailRoute.page),
+    AutoRoute(page: CommentRoute.page),
   ];
 }

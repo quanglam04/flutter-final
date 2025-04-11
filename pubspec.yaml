@@ -1,14 +1,19 @@
 name: flutter_clean_architecture
 description: "A new Flutter project."
-publish_to: 'none'
+publish_to: "none"
 
 version: 1.0.0+1
 
 environment:
   sdk: ^3.7.2
 
-dependencies:
+flutter_native_splash:
+  image: assets/images/logo.png # Đường dẫn tới hình ảnh splash
+  color: "#ffffff" # Màu nền của splash screen
+  android: true
+  ios: true
 
+dependencies:
   flutter_native_splash: 2.4.4
   flutter:
     sdk: flutter
@@ -69,7 +74,6 @@ dependencies:
   gap: ^3.0.1
   google_sign_in: ^6.3.0
 
-
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -98,7 +102,6 @@ dependency_overrides:
       url: https://github.com/mbfakourii/Flare-Flutter.git
       path: flare_flutter
       ref: remove_hashValues
-
 
 flutter:
   uses-material-design: true

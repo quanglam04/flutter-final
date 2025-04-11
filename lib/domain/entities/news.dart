@@ -3,6 +3,7 @@ part 'news.g.dart';
 
 @JsonSerializable()
 class NewsItem {
+  final String id;
   final String title;
   final String source;
   final String timeAgo;
@@ -13,6 +14,7 @@ class NewsItem {
   final String description;
 
   NewsItem({
+    required this.id,
     required this.topic,
     required this.title,
     required this.source,
