@@ -323,6 +323,7 @@ class HomePage extends BasePage<HomeBloc, HomeEvent, HomeState> {
                                       state.listNews ??
                                       [
                                         NewsItem(
+                                          id: '',
                                           topic: '',
                                           title: '',
                                           source: '',
@@ -341,6 +342,7 @@ class HomePage extends BasePage<HomeBloc, HomeEvent, HomeState> {
                                           state.listNews ??
                                           [
                                             NewsItem(
+                                              id: '',
                                               topic: '',
                                               title: '',
                                               source: '',

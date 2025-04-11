@@ -38,6 +38,7 @@ class NewsRepositoryImpl implements NewsRepository {
 
   static final List<NewsItem> _listNews = [
     NewsItem(
+      id: '1',
       title: 'Ukraine\'s President Zelensky to BBC: Blood money being paid...',
       source: 'BBC News',
       timeAgo: '14m ago',
@@ -48,6 +49,7 @@ class NewsRepositoryImpl implements NewsRepository {
       description: '',
     ),
     NewsItem(
+      id: '2',
       title: 'Ukraine\'s President Zelensky to BBC: Blood money being paid...',
       source: 'BBC News',
       timeAgo: '14m ago',
@@ -58,6 +60,7 @@ class NewsRepositoryImpl implements NewsRepository {
       description: '',
     ),
     NewsItem(
+      id: '3',
       title: 'Ukraine\'s President Zelensky to BBC: Blood money being paid...',
       source: 'BBC News',
       timeAgo: '14m ago',
@@ -68,6 +71,7 @@ class NewsRepositoryImpl implements NewsRepository {
       description: '',
     ),
     NewsItem(
+      id: '4',
       title: 'Her train broke down. Her phone died. And then she met her..',
       source: 'CNN',
       timeAgo: '1h ago',
@@ -78,6 +82,7 @@ class NewsRepositoryImpl implements NewsRepository {
       description: '',
     ),
     NewsItem(
+      id: '5',
       title: 'Russian warship: Moskva sinks in Black Sea',
       source: 'BBC News',
       timeAgo: '4h ago',
@@ -88,6 +93,7 @@ class NewsRepositoryImpl implements NewsRepository {
       description: '',
     ),
     NewsItem(
+      id: '6',
       title: 'Wind power produced more electricity than coal and nucle...',
       source: 'USA Today',
       timeAgo: '4h ago',
@@ -98,6 +104,7 @@ class NewsRepositoryImpl implements NewsRepository {
       description: '',
     ),
     NewsItem(
+      id: '7',
       title: '\'We keep rising to new challenges:\' For churches hit by',
       source: 'USA Today',
       timeAgo: '4h ago',
@@ -112,6 +119,7 @@ class NewsRepositoryImpl implements NewsRepository {
 
   final List<NewsItem> _listNewsOfCurrentUser = [
     NewsItem(
+      id: '8',
       title: '5 xu hướng công nghệ AI mới nhất năm 2025',
       source: 'Tech News VN',
       timeAgo: '2h ago',
@@ -124,6 +132,7 @@ class NewsRepositoryImpl implements NewsRepository {
     ),
 
     NewsItem(
+      id: '9',
       title: 'Tình hình thị trường chứng khoán quý 2/2025',
       source: 'Tài chính Online',
       timeAgo: '5h ago',
@@ -136,6 +145,7 @@ class NewsRepositoryImpl implements NewsRepository {
     ),
 
     NewsItem(
+      id: '10',
       title: 'Top 10 điểm du lịch hấp dẫn nhất Việt Nam hè 2025',
       source: 'Du lịch & Khám phá',
       timeAgo: '1d ago',
@@ -148,6 +158,7 @@ class NewsRepositoryImpl implements NewsRepository {
     ),
 
     NewsItem(
+      id: '11',
       title: 'Xu hướng thời trang bền vững năm 2025',
       source: 'Fashion Daily',
       timeAgo: '3h ago',
@@ -160,6 +171,7 @@ class NewsRepositoryImpl implements NewsRepository {
     ),
 
     NewsItem(
+      id: '12',
       title: 'Chi tiết về chiếc điện thoại gập mới nhất của Samsung',
       source: 'Gadget Review',
       timeAgo: '12h ago',
@@ -172,6 +184,7 @@ class NewsRepositoryImpl implements NewsRepository {
     ),
 
     NewsItem(
+      id: '13',
       title: 'Các phương pháp học trực tuyến hiệu quả năm 2025',
       source: 'Education Today',
       timeAgo: '2d ago',
@@ -187,5 +200,15 @@ class NewsRepositoryImpl implements NewsRepository {
   @override
   Future<List<NewsItem>> getNewsOfCurrentUser() async {
     return _listNewsOfCurrentUser;
+  }
+
+  @override
+  Future<NewsItem> getNewsById(String newsId) async {
+    return _listNews.firstWhere((news) => news.id.trim() == newsId);
+  }
+
+  @override
+  Future<bool> changeTymNews(String newsId) {
+    throw UnimplementedError();
   }
 }
