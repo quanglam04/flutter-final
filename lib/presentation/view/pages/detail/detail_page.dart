@@ -53,9 +53,12 @@ class DetailPage extends BasePage<DetailBloc, DetailEvent, DetailState> {
                   onSelected: (value) => {},
                   itemBuilder:
                       (context) => [
-                        const PopupMenuItem(
-                          child: Text('Setting'),
+                        PopupMenuItem(
+                          child: const Text('Setting'),
                           value: 'Setting',
+                          onTap: () {
+                            context.pushRoute(SettingRoute());
+                          },
                         ),
                       ],
                 ),
@@ -74,9 +77,8 @@ class DetailPage extends BasePage<DetailBloc, DetailEvent, DetailState> {
                         width: 50,
                         height: 50,
                         child: ClipOval(
-                          child: Image.network(
-                            state.newsDetail?.author ??
-                                'https://avatars.githubusercontent.com/u/119520066?v=4',
+                          child: Image.asset(
+                            state.newsDetail?.author ?? '',
                             fit: BoxFit.cover,
                           ),
                         ),
