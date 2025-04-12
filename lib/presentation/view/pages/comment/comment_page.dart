@@ -30,7 +30,7 @@ class CommentPage extends BasePage<CommentBloc, CommentEvent, CommentState> {
         centerTitle: true,
         shadowColor: Colors.transparent,
         title: Text(
-          'Profile',
+          'Comments',
           style: textTheme?.textMedium?.copyWith(color: colorSchema?.darkBlack),
         ),
         leading: IconButton(
@@ -132,7 +132,7 @@ class CommentPage extends BasePage<CommentBloc, CommentEvent, CommentState> {
             ),
             const Divider(height: 1),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
               child: Row(
                 children: [
                   Expanded(
@@ -144,22 +144,17 @@ class CommentPage extends BasePage<CommentBloc, CommentEvent, CommentState> {
                           borderSide: BorderSide.none,
                         ),
                         filled: true,
-                        fillColor: Colors.grey.shade200,
+                        fillColor: colorSchema?.whiteText,
                         contentPadding: const EdgeInsets.symmetric(
-                          horizontal: 12,
-                          vertical: 8,
+                          horizontal: 15,
+                          vertical: 12,
                         ),
                       ),
                     ),
                   ),
-                  const SizedBox(width: 8),
                   Container(
-                    decoration: BoxDecoration(
-                      color: Colors.blue,
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    padding: const EdgeInsets.all(10),
-                    child: const Icon(Icons.send, color: Colors.white),
+                    padding: const EdgeInsets.all(2),
+                    child: Assets.icons.send.svg(),
                   ),
                 ],
               ),
