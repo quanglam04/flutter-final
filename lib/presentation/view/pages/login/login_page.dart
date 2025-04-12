@@ -158,16 +158,74 @@ class LoginPage extends BasePage<LoginBloc, LoginEvent, LoginState> {
                   logger.d(username.length);
                   if (username.length < 3 || password.length < 3) {
                     logger.d(username.length);
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: const Text(
-                          'Username và password phải có ít nhất 3 ký tự.',
-                        ),
-                        backgroundColor: colorSchema?.errorDark ?? Colors.red,
-                      ),
+                    showDialog(
+                      context: context,
+                      builder:
+                          (context) => AlertDialog(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            title: const Row(
+                              children: [
+                                Icon(
+                                  Icons.warning_amber_rounded,
+                                  color: Colors.orange,
+                                ),
+                                SizedBox(width: 8),
+                                Text('Thông báo'),
+                              ],
+                            ),
+                            content: const Text(
+                              'Username và password phải có ít nhất 3 ký tự.',
+                              style: TextStyle(fontSize: 20),
+                            ),
+                            actions: [
+                              TextButton(
+                                onPressed: () => Navigator.of(context).pop(),
+                                child: const Text(
+                                  'Đóng',
+                                  style: TextStyle(fontSize: 20),
+                                ),
+                              ),
+                            ],
+                          ),
                     );
                     return;
                   }
+
+                  if (username != 'trinhquanglam' || password != '123456') {
+                    showDialog(
+                      context: context,
+                      builder:
+                          (context) => AlertDialog(
+                            title: const Row(
+                              children: [
+                                Icon(
+                                  Icons.warning_amber_rounded,
+                                  color: Colors.orange,
+                                ),
+                                SizedBox(width: 8),
+                                Text('Thông báo'),
+                              ],
+                            ),
+                            content: const Text(
+                              'Sai tài khoản hoặc mật khẩu.',
+                              style: TextStyle(fontSize: 20),
+                            ),
+                            actions: [
+                              TextButton(
+                                onPressed: () => Navigator.of(context).pop(),
+                                child: const Text(
+                                  'OK',
+                                  style: TextStyle(fontSize: 20),
+                                ),
+                              ),
+                            ],
+                          ),
+                    );
+                    return;
+                  }
+
                   CurrentUser user = new CurrentUser(
                     '1',
                     'Trịnh Lâm' ?? '',

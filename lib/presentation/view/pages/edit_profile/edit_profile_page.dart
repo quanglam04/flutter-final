@@ -67,7 +67,7 @@ class EditProfilePage
                       SnackBar(
                         content: const Text(
                           'Vui lòng điền đầy đủ các thông tin',
-                          style: TextStyle(fontSize: 30),
+                          style: TextStyle(fontSize: 20),
                         ),
                         backgroundColor: colorSchema?.errorDark ?? Colors.red,
                       ),
