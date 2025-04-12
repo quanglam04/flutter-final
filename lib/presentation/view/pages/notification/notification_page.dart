@@ -106,6 +106,14 @@ class NotificationPage
                                       NotificationBloc,
                                       NotificationState
                                     >(
+                                      buildWhen:
+                                          (previous, current) =>
+                                              previous.isNotificationRead(
+                                                notification.notificationId,
+                                              ) !=
+                                              current.isNotificationRead(
+                                                notification.notificationId,
+                                              ),
                                       builder: (context, state) {
                                         return Column(
                                           children: [
@@ -130,8 +138,10 @@ class NotificationPage
                                                   height: 99,
                                                   decoration: BoxDecoration(
                                                     color:
-                                                        notification.isRead ==
-                                                                false
+                                                        !state.isNotificationRead(
+                                                              notification
+                                                                  .notificationId,
+                                                            )
                                                             ? colorSchema
                                                                 ?.grayscaleSecondaryButton
                                                             : colorSchema

@@ -17,6 +17,6 @@ class CommentPage extends BasePage<CommentBloc, CommentEvent, CommentState> {
 
   @override
   Widget builder(BuildContext context) {
-    return const SizedBox();
+    return Scaffold(appBar: AppBar(title: Text('Màn comment')));
   }
 }

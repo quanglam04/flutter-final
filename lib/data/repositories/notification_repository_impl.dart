@@ -2,6 +2,7 @@ import 'package:flutter_clean_architecture/domain/entities/author.dart';
 import 'package:flutter_clean_architecture/domain/entities/notification.dart';
 import 'package:flutter_clean_architecture/shared/common/error_entity/business_error_entity.dart';
 import 'package:injectable/injectable.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../domain/repositories/notification_repository.dart';
 
 @Injectable(as: NotificationRepository)
@@ -26,14 +27,16 @@ class NotificationRepositoryImpl extends NotificationRepository {
 
   @override
   Future<List<Notification>> getAllNotification() async {
-    try {
-      return _Notifications;
-    } catch (e) {
-      throw BusinessErrorEntityData(
-        name: 'lỗi khi lấy danh sách thông báo',
-        message: 'lỗi khi lấy danh sách thông báo',
-      );
+    final notifications = _Notifications;
+    final prefs = await SharedPreferences.getInstance();
+    final readNotificationIds = prefs.getStringList('read_notifications') ?? [];
+    for (var notification in notifications) {
+      if (readNotificationIds.contains(notification.notificationId)) {
+        notification.isRead = true;
+      }
     }
+
+    return notifications;
   }
 
   @override
@@ -42,7 +45,16 @@ class NotificationRepositoryImpl extends NotificationRepository {
       final Notification notification = _Notifications.firstWhere(
         (notification) => notification.notificationId == notificationId,
       );
-      notification.isRead = !notification.isRead;
+      notification.isRead = true;
+
+      final prefs = await SharedPreferences.getInstance();
+      final readNotificationIds =
+          prefs.getStringList('read_notifications') ?? [];
+      if (!readNotificationIds.contains(notificationId)) {
+        readNotificationIds.add(notificationId);
+        await prefs.setStringList('read_notifications', readNotificationIds);
+      }
+
       return true;
     } catch (e) {
       throw BusinessErrorEntityData(

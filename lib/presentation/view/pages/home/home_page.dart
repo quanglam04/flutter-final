@@ -328,7 +328,7 @@ class HomePage extends BasePage<HomeBloc, HomeEvent, HomeState> {
                                           title: '',
                                           source: '',
                                           timeAgo: '',
-                                          imageUrl: '',
+                                          imageUrl: 'assets/images/dulich.jpg',
                                           category: '',
                                           author: '',
                                           description: '',
@@ -347,7 +347,8 @@ class HomePage extends BasePage<HomeBloc, HomeEvent, HomeState> {
                                               title: '',
                                               source: '',
                                               timeAgo: '',
-                                              imageUrl: '',
+                                              imageUrl:
+                                                  'assets/images/dulich.jpg',
                                               category: '',
                                               author: '',
                                               description: '',
