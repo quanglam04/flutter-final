@@ -33,6 +33,8 @@ class LoginPage extends BasePage<LoginBloc, LoginEvent, LoginState> {
     );
     final textTheme = context.themeOwn().textTheme;
     final colorSchema = context.themeOwn().colorSchema;
+    final usernameController = TextEditingController();
+    final passwordController = TextEditingController();
 
     return Scaffold(
       body: Padding(
@@ -77,7 +79,7 @@ class LoginPage extends BasePage<LoginBloc, LoginEvent, LoginState> {
                 ],
               ),
               const SizedBox(height: 4),
-              AppFormField(),
+              AppFormField(controller: usernameController),
               const SizedBox(height: 16),
               Row(
                 children: [
@@ -97,6 +99,7 @@ class LoginPage extends BasePage<LoginBloc, LoginEvent, LoginState> {
               ),
               const SizedBox(height: 4),
               AppFormField(
+                controller: passwordController,
                 obscureText: true,
                 decoration: InputDecoration(
                   suffixIcon: Padding(
@@ -143,13 +146,28 @@ class LoginPage extends BasePage<LoginBloc, LoginEvent, LoginState> {
                   ),
                 ],
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               AppButton.primary(
                 height: 50,
                 backgroundColor: colorSchema?.primaryDefault,
                 title: 'Login',
                 titleStyle: textTheme?.textMedium,
                 onPressed: () async {
+                  final username = usernameController.text.trim();
+                  final password = passwordController.text.trim();
+                  logger.d(username.length);
+                  if (username.length < 3 || password.length < 3) {
+                    logger.d(username.length);
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: const Text(
+                          'Username và password phải có ít nhất 3 ký tự.',
+                        ),
+                        backgroundColor: colorSchema?.errorDark ?? Colors.red,
+                      ),
+                    );
+                    return;
+                  }
                   CurrentUser user = new CurrentUser(
                     '1',
                     'Trịnh Lâm' ?? '',

@@ -64,12 +64,12 @@ class EditProfilePage
                       email.isEmpty ||
                       phone.isEmpty) {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text(
+                      SnackBar(
+                        content: const Text(
                           'Vui lòng điền đầy đủ các thông tin',
                           style: TextStyle(fontSize: 30),
                         ),
-                        backgroundColor: Colors.red,
+                        backgroundColor: colorSchema?.errorDark ?? Colors.red,
                       ),
                     );
                     return;
