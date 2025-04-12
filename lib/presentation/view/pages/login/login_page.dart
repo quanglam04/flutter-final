@@ -149,7 +149,21 @@ class LoginPage extends BasePage<LoginBloc, LoginEvent, LoginState> {
                 backgroundColor: colorSchema?.primaryDefault,
                 title: 'Login',
                 titleStyle: textTheme?.textMedium,
-                onPressed: () => context.pushRoute(HomeRoute()),
+                onPressed: () async {
+                  CurrentUser user = new CurrentUser(
+                    '1',
+                    'Trịnh Lâm' ?? '',
+                    'https://avatars.githubusercontent.com/u/119520066?v=4' ??
+                        '',
+                    'Lam Trinh Quang',
+                    'trinhquanglam2k4@gmail.com',
+                    '0971624914',
+                    'trinhquanglam.com',
+                    'trinhquanglam.web.com',
+                  );
+                  await saveUserToLocal(user);
+                  context.pushRoute(const HomeRoute());
+                },
               ),
               const SizedBox(height: 16),
               Align(
