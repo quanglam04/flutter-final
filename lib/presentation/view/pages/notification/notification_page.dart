@@ -27,6 +27,7 @@ class NotificationPage
   Widget builder(BuildContext context) {
     final textTheme = context.themeOwn().textTheme;
     final colorSchema = context.themeOwn().colorSchema;
+    final iconColor = Theme.of(context).iconTheme.color;
 
     return BlocBuilder<NotificationBloc, NotificationState>(
       builder: (context, state) {
@@ -48,13 +49,16 @@ class NotificationPage
               Padding(
                 padding: const EdgeInsets.only(right: 12),
                 child: PopupMenuButton<String>(
-                  icon: Assets.icons.threeDot2.svg(),
+                  icon: Assets.icons.threeDot2.svg(color: iconColor),
                   onSelected: (x) {},
                   itemBuilder:
                       (context) => [
-                        const PopupMenuItem(
+                        PopupMenuItem(
                           value: 'Setting',
-                          child: Text('Setting'),
+                          child: const Text('Setting'),
+                          onTap: () {
+                            context.pushRoute(const SettingRoute());
+                          },
                         ),
                         PopupMenuItem(
                           value: 'Logout',
