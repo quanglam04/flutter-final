@@ -2,7 +2,6 @@ import 'package:flutter_clean_architecture/domain/entities/news.dart';
 import 'package:flutter_clean_architecture/domain/entities/user.dart';
 import 'package:flutter_clean_architecture/domain/repositories/profile_repository.dart';
 import 'package:flutter_clean_architecture/domain/usecases/get_news_of_current_user_use_case.dart';
-import 'package:flutter_clean_architecture/shared/utils/logger.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 
@@ -27,7 +26,6 @@ class ProfileBloc extends BaseBloc<ProfileEvent, ProfileState> {
           case _LoadData():
             final CurrentUser? currentUser =
                 await _profileRepository.loadUserFromLocal();
-            logger.d('User loaded from local: $currentUser');
 
             if (currentUser != null) {
               emit(state.copyWith(currentUser: currentUser));

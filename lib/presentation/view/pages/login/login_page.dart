@@ -33,6 +33,8 @@ class LoginPage extends BasePage<LoginBloc, LoginEvent, LoginState> {
     );
     final textTheme = context.themeOwn().textTheme;
     final colorSchema = context.themeOwn().colorSchema;
+    final usernameController = TextEditingController();
+    final passwordController = TextEditingController();
 
     return Scaffold(
       body: Padding(
@@ -77,7 +79,7 @@ class LoginPage extends BasePage<LoginBloc, LoginEvent, LoginState> {
                 ],
               ),
               const SizedBox(height: 4),
-              AppFormField(),
+              AppFormField(controller: usernameController),
               const SizedBox(height: 16),
               Row(
                 children: [
@@ -97,6 +99,7 @@ class LoginPage extends BasePage<LoginBloc, LoginEvent, LoginState> {
               ),
               const SizedBox(height: 4),
               AppFormField(
+                controller: passwordController,
                 obscureText: true,
                 decoration: InputDecoration(
                   suffixIcon: Padding(
@@ -143,13 +146,100 @@ class LoginPage extends BasePage<LoginBloc, LoginEvent, LoginState> {
                   ),
                 ],
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               AppButton.primary(
                 height: 50,
                 backgroundColor: colorSchema?.primaryDefault,
                 title: 'Login',
                 titleStyle: textTheme?.textMedium,
-                onPressed: () => context.pushRoute(HomeRoute()),
+                onPressed: () async {
+                  final username = usernameController.text.trim();
+                  final password = passwordController.text.trim();
+                  logger.d(username.length);
+                  if (username.length < 3 || password.length < 3) {
+                    logger.d(username.length);
+                    showDialog(
+                      context: context,
+                      builder:
+                          (context) => AlertDialog(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            title: const Row(
+                              children: [
+                                Icon(
+                                  Icons.warning_amber_rounded,
+                                  color: Colors.orange,
+                                ),
+                                SizedBox(width: 8),
+                                Text('Thông báo'),
+                              ],
+                            ),
+                            content: const Text(
+                              'Username và password phải có ít nhất 3 ký tự.',
+                              style: TextStyle(fontSize: 20),
+                            ),
+                            actions: [
+                              TextButton(
+                                onPressed: () => Navigator.of(context).pop(),
+                                child: const Text(
+                                  'Đóng',
+                                  style: TextStyle(fontSize: 20),
+                                ),
+                              ),
+                            ],
+                          ),
+                    );
+                    return;
+                  }
+
+                  if (username != 'trinhquanglam' || password != '123456') {
+                    showDialog(
+                      context: context,
+                      builder:
+                          (context) => AlertDialog(
+                            title: const Row(
+                              children: [
+                                Icon(
+                                  Icons.warning_amber_rounded,
+                                  color: Colors.orange,
+                                ),
+                                SizedBox(width: 8),
+                                Text('Thông báo'),
+                              ],
+                            ),
+                            content: const Text(
+                              'Sai tài khoản hoặc mật khẩu.',
+                              style: TextStyle(fontSize: 20),
+                            ),
+                            actions: [
+                              TextButton(
+                                onPressed: () => Navigator.of(context).pop(),
+                                child: const Text(
+                                  'OK',
+                                  style: TextStyle(fontSize: 20),
+                                ),
+                              ),
+                            ],
+                          ),
+                    );
+                    return;
+                  }
+
+                  CurrentUser user = new CurrentUser(
+                    '1',
+                    'Trịnh Lâm' ?? '',
+                    'https://avatars.githubusercontent.com/u/119520066?v=4' ??
+                        '',
+                    'Lam Trinh Quang',
+                    'trinhquanglam2k4@gmail.com',
+                    '0971624914',
+                    'trinhquanglam.com',
+                    'trinhquanglam.web.com',
+                  );
+                  await saveUserToLocal(user);
+                  context.pushRoute(const HomeRoute());
+                },
               ),
               const SizedBox(height: 16),
               Align(

@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_clean_architecture/gen/assets.gen.dart';
+import 'package:flutter_clean_architecture/presentation/router/router.dart';
 import 'package:flutter_clean_architecture/presentation/view/widgets/app_form_field.dart';
 import 'package:flutter_clean_architecture/shared/extension/context.dart';
 import 'package:gap/gap.dart';
@@ -63,12 +64,12 @@ class EditProfilePage
                       email.isEmpty ||
                       phone.isEmpty) {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text(
+                      SnackBar(
+                        content: const Text(
                           'Vui lòng điền đầy đủ các thông tin',
-                          style: TextStyle(fontSize: 30),
+                          style: TextStyle(fontSize: 20),
                         ),
-                        backgroundColor: Colors.red,
+                        backgroundColor: colorSchema?.errorDark ?? Colors.red,
                       ),
                     );
                     return;
@@ -118,7 +119,7 @@ class EditProfilePage
                     ),
                   );
 
-                  context.pop();
+                  context.pushRoute(const ProfileRoute());
                 },
               ),
             ),
