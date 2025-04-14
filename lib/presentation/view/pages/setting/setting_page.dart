@@ -132,7 +132,7 @@ class SettingPage extends BasePage<SettingBloc, SettingEvent, SettingState> {
               const Gap(48),
               Row(
                 children: [
-                  Assets.icons.settingIcon5.svg(),
+                  Assets.icons.settingIcon5.svg(color: colorSchema?.iconWhite),
                   const Gap(4),
                   InkWell(
                     child: Text(
