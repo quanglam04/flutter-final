@@ -43,66 +43,71 @@ class News extends StatelessWidget {
                   ),
                   const Gap(8),
                   Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          newsItem.category,
-                          style: textTheme?.textSmall,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                        const SizedBox(height: 4),
-                        Text(
-                          newsItem.title,
-                          maxLines: 3,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                        const Gap(12),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Expanded(
-                              child: Row(
-                                children: [
-                                  ClipOval(
-                                    child: Image.asset(
-                                      newsItem.author,
-                                      height: 20,
-                                      width: 20,
-                                      fit: BoxFit.cover,
+                    child: SingleChildScrollView(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            newsItem.category,
+                            style: textTheme?.textSmall,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          const SizedBox(height: 4),
+                          Text(
+                            newsItem.title,
+                            maxLines: 3,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          const Gap(12),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Expanded(
+                                child: Row(
+                                  children: [
+                                    ClipOval(
+                                      child: Image.asset(
+                                        newsItem.author,
+                                        height: 20,
+                                        width: 20,
+                                        fit: BoxFit.cover,
+                                      ),
                                     ),
-                                  ),
-                                  const SizedBox(width: 4),
-                                  Flexible(
-                                    child: Text(
-                                      newsItem.source,
-                                      style: textTheme?.textXSmallLink
-                                          ?.copyWith(
-                                            color:
-                                                colorSchema?.grayscaleBodyText,
-                                          ),
-                                      maxLines: 1,
-                                      overflow: TextOverflow.ellipsis,
+                                    const SizedBox(width: 4),
+                                    Flexible(
+                                      child: Text(
+                                        newsItem.source,
+                                        style: textTheme?.textXSmallLink
+                                            ?.copyWith(
+                                              color:
+                                                  colorSchema
+                                                      ?.grayscaleBodyText,
+                                            ),
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
                                     ),
-                                  ),
-                                  const SizedBox(width: 4),
-                                  Assets.icons.clock.svg(width: 12, height: 12),
-                                  const SizedBox(width: 4),
-                                  Text(
-                                    newsItem.timeAgo,
-                                    style: textTheme?.textXSmall?.copyWith(
-                                      color: colorSchema?.grayscaleBodyText,
+                                    const SizedBox(width: 4),
+                                    Assets.icons.clock.svg(
+                                      width: 12,
+                                      height: 12,
                                     ),
-                                  ),
-                                ],
+                                    const SizedBox(width: 4),
+                                    Text(
+                                      newsItem.timeAgo,
+                                      style: textTheme?.textXSmall?.copyWith(
+                                        color: colorSchema?.grayscaleBodyText,
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                            Assets.icons.threedot.svg(),
-                          ],
-                        ),
-                      ],
+                              Assets.icons.threedot.svg(),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ],

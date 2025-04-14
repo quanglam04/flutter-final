@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AppThemeData {
-  AppThemeData({
-    this.textTheme,
-    this.colorSchema,
-  });
+  AppThemeData({this.textTheme, this.colorSchema});
 
   final AppTextTheme? textTheme;
   final AppColorSchema? colorSchema;
@@ -26,7 +23,6 @@ class AppTextTheme {
     this.textXSmallLink,
     this.textMediumLink,
     this.textLargeLink,
-
 
     this.h1,
     this.h2,
@@ -58,7 +54,6 @@ class AppTextTheme {
   final TextStyle? textMediumLink;
   final TextStyle? textLargeLink;
 
-
   final TextStyle? h1;
   final TextStyle? h2;
   final TextStyle? h3;
@@ -72,11 +67,11 @@ class AppTextTheme {
   final TextStyle? header;
   final TextStyle? title2;
   final TextStyle? title3;
-
 }
 
 class AppColorSchema {
   AppColorSchema({
+    this.iconWhite,
     this.primary,
     this.mainText,
     this.subText,
@@ -91,7 +86,6 @@ class AppColorSchema {
     this.secondary4,
     this.badgeColor,
     this.title2,
-
 
     this.darkBlack,
     this.successDefault,
@@ -158,4 +152,5 @@ class AppColorSchema {
   final Color? darkmodeTitle;
   final Color? darkmodeBody;
   final Color? darkmodeInputBackground;
+  final Color? iconWhite;
 }

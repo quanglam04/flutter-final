@@ -1,9 +1,13 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_clean_architecture/gen/assets.gen.dart';
 import 'package:flutter_clean_architecture/presentation/router/router.dart';
+import 'package:flutter_clean_architecture/presentation/theme/theme_bloc.dart';
+import 'package:flutter_clean_architecture/presentation/view/widgets/app_switch.dart';
 import 'package:flutter_clean_architecture/shared/extension/context.dart';
+import 'package:flutter_clean_architecture/shared/utils/logger.dart';
 import 'package:gap/gap.dart';
 
 import '../../../base/base_page.dart';
@@ -24,6 +28,9 @@ class SettingPage extends BasePage<SettingBloc, SettingEvent, SettingState> {
     final textTheme = context.themeOwn().textTheme;
     final colorSchema = context.themeOwn().colorSchema;
     final iconColor = Theme.of(context).iconTheme.color;
+    logger.d(textTheme);
+    logger.d(colorSchema);
+    logger.d(iconColor);
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -45,7 +52,7 @@ class SettingPage extends BasePage<SettingBloc, SettingEvent, SettingState> {
             children: [
               Row(
                 children: [
-                  Assets.icons.settingIcon1.svg(),
+                  Assets.icons.settingIcon1.svg(color: colorSchema?.iconWhite),
                   const Gap(4),
                   Text(
                     'Notification',
@@ -53,30 +60,30 @@ class SettingPage extends BasePage<SettingBloc, SettingEvent, SettingState> {
                       color: colorSchema?.darkBlack,
                     ),
                   ),
-                  Spacer(),
-                  Assets.icons.settingIcon31.svg(),
+                  const Spacer(),
+                  Assets.icons.settingIcon31.svg(color: colorSchema?.iconWhite),
                 ],
               ),
               const Gap(48),
               Row(
                 children: [
-                  Assets.icons.settingIcon2.svg(),
-                  Gap(4),
+                  Assets.icons.settingIcon2.svg(color: colorSchema?.iconWhite),
+                  const Gap(4),
                   Text(
                     'Security',
                     style: textTheme?.textMedium?.copyWith(
                       color: colorSchema?.darkBlack,
                     ),
                   ),
-                  Spacer(),
-                  Assets.icons.settingIcon31.svg(),
+                  const Spacer(),
+                  Assets.icons.settingIcon31.svg(color: colorSchema?.iconWhite),
                 ],
               ),
               const Gap(48),
               Row(
                 children: [
-                  Assets.icons.settingIcon3.svg(),
-                  Gap(4),
+                  Assets.icons.settingIcon3.svg(color: colorSchema?.iconWhite),
+                  const Gap(4),
                   Text(
                     'Help',
                     style: textTheme?.textMedium?.copyWith(
@@ -84,29 +91,49 @@ class SettingPage extends BasePage<SettingBloc, SettingEvent, SettingState> {
                     ),
                   ),
                   Spacer(),
-                  Assets.icons.settingIcon31.svg(),
+                  Assets.icons.settingIcon31.svg(color: colorSchema?.iconWhite),
                 ],
               ),
               const Gap(48),
               Row(
                 children: [
-                  Assets.icons.settingIcon4.svg(),
-                  Gap(4),
+                  Assets.icons.settingIcon4.svg(color: colorSchema?.iconWhite),
+                  const Gap(4),
                   Text(
                     'Dark Mode',
                     style: textTheme?.textMedium?.copyWith(
                       color: colorSchema?.darkBlack,
                     ),
                   ),
-                  Spacer(),
-                  Assets.icons.toggle.svg(),
+                  const Spacer(),
+                  BlocBuilder<SettingBloc, SettingState>(
+                    builder: (context, state) {
+                      return SizedBox(
+                        width: 36,
+                        child: AppCupertinoSwitch(
+                          value: state.darkMode,
+                          onChanged: (value) {
+                            context.read<SettingBloc>().add(
+                              const SettingEvent.changeDarkMode(),
+                            );
+                            context.read<ThemeBloc>().add(
+                              ThemeEvent.changeThemeMode(value),
+                            );
+                          },
+                          activeTrackColor: const Color(0xff667080),
+                          inactiveTrackColor: colorSchema?.grayscaleButtonText,
+                          thumbColor: CupertinoColors.white,
+                        ),
+                      );
+                    },
+                  ),
                 ],
               ),
               const Gap(48),
               Row(
                 children: [
-                  Assets.icons.settingIcon5.svg(),
-                  Gap(4),
+                  Assets.icons.settingIcon5.svg(color: colorSchema?.iconWhite),
+                  const Gap(4),
                   InkWell(
                     child: Text(
                       'Logout',

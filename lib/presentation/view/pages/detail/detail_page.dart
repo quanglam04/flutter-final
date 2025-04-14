@@ -179,7 +179,9 @@ class DetailPage extends BasePage<DetailBloc, DetailEvent, DetailState> {
                 const Gap(30),
                 Expanded(
                   child: InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      context.pushRoute(CommentRoute());
+                    },
                     child: Row(
                       children: [
                         Assets.icons.comment.svg(),
