@@ -78,7 +78,8 @@ class DetailPage extends BasePage<DetailBloc, DetailEvent, DetailState> {
                         height: 50,
                         child: ClipOval(
                           child: Image.asset(
-                            state.newsDetail?.author ?? '',
+                            state.newsDetail?.author ??
+                                'assets/images/author.png',
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -121,7 +122,10 @@ class DetailPage extends BasePage<DetailBloc, DetailEvent, DetailState> {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(6),
                       image: DecorationImage(
-                        image: AssetImage(state.newsDetail?.imageUrl ?? ''),
+                        image: AssetImage(
+                          state.newsDetail?.imageUrl ??
+                              'assets/images/giaoduc.jpg',
+                        ),
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -168,14 +172,24 @@ class DetailPage extends BasePage<DetailBloc, DetailEvent, DetailState> {
             child: Row(
               children: [
                 InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    context.read<DetailBloc>().add(DetailEvent.changeTym());
+                  },
                   child: ConstrainedBox(
                     constraints: const BoxConstraints(minWidth: 43),
-                    child: Assets.icons.tym.svg(),
+                    child: Assets.icons.tym.svg(
+                      color:
+                          state.saveState
+                              ? Colors.red
+                              : colorSchema?.grayscaleBodyText,
+                    ),
                   ),
                 ),
                 const Gap(4),
-                const Expanded(flex: 0, child: Text('24.5k')),
+                Expanded(
+                  flex: 0,
+                  child: Text((state.numberOfTym ?? 34).toString()),
+                ),
                 const Gap(30),
                 Expanded(
                   child: InkWell(
@@ -187,7 +201,7 @@ class DetailPage extends BasePage<DetailBloc, DetailEvent, DetailState> {
                         Assets.icons.comment.svg(),
                         const Gap(4),
                         Text(
-                          '1k',
+                          '98',
                           style: textTheme?.textMedium?.copyWith(
                             color: colorSchema?.grayscaleTitleactive,
                           ),

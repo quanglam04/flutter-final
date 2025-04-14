@@ -8,7 +8,8 @@ class DetailState extends BaseState with _$DetailState {
     this.newsDetail,
     this.tymState = false,
     this.followState = false,
-    this.saveState = false,
+    this.saveState = true,
+    this.numberOfTym = 30,
   });
 
   @override
@@ -19,4 +20,6 @@ class DetailState extends BaseState with _$DetailState {
   final bool followState;
   @override
   final bool saveState;
+  @override
+  final int numberOfTym;
 }

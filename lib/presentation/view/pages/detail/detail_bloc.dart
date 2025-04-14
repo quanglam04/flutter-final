@@ -27,10 +27,22 @@ class DetailBloc extends BaseBloc<DetailEvent, DetailState> {
             NewsItem newsItem = await _getNewsByIdUseCase.call(
               params: GetNewsByIdParam(id),
             );
-            emit(state.copyWith(newsDetail: newsItem));
+            int tym = newsItem.numberOfTym;
+            emit(state.copyWith(newsDetail: newsItem, numberOfTym: tym));
             break;
           case _ChangeTym():
-            throw UnimplementedError();
+            int tym = state.newsDetail?.numberOfTym ?? 0;
+            if (state.saveState == true) {
+              tym -= 1;
+            }
+            emit(
+              state.copyWith(
+                numberOfTym: tym,
+                pageStatus: PageStatus.Loaded,
+                saveState: !state.saveState,
+              ),
+            );
+            break;
           case _ChangeSave():
             throw UnimplementedError();
           case _ChangeFollow():
