@@ -6,7 +6,7 @@ class DetailState extends BaseState with _$DetailState {
     super.pageStatus = PageStatus.Loaded,
     super.pageErrorMessage,
     this.newsDetail,
-    this.tymState = false,
+    this.tymState = true,
     this.followState = false,
     this.saveState = true,
     this.numberOfTym = 30,

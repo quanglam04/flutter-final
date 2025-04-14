@@ -32,21 +32,21 @@ class DetailBloc extends BaseBloc<DetailEvent, DetailState> {
             break;
           case _ChangeTym():
             int tym = state.newsDetail?.numberOfTym ?? 0;
-            if (state.saveState == true) {
+            if (state.tymState == true) {
               tym -= 1;
             }
             emit(
               state.copyWith(
                 numberOfTym: tym,
                 pageStatus: PageStatus.Loaded,
-                saveState: !state.saveState,
+                tymState: !state.tymState,
               ),
             );
             break;
           case _ChangeSave():
-            throw UnimplementedError();
+            emit(state.copyWith(saveState: !state.saveState));
           case _ChangeFollow():
-            throw UnimplementedError();
+            emit(state.copyWith(followState: !state.followState));
         }
       } catch (e, s) {
         handleError(emit, ErrorConverter.convert(e, s));
