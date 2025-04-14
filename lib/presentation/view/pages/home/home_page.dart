@@ -62,7 +62,11 @@ class HomePage extends BasePage<HomeBloc, HomeEvent, HomeState> {
                             width: 32,
                             height: 32,
                             decoration: BoxDecoration(
-                              color: Colors.white,
+                              color:
+                                  Theme.of(context).brightness ==
+                                          Brightness.light
+                                      ? Colors.white
+                                      : colorSchema?.darkmodeInputBackground,
                               borderRadius: BorderRadius.circular(6),
                               boxShadow: [
                                 BoxShadow(
@@ -76,6 +80,7 @@ class HomePage extends BasePage<HomeBloc, HomeEvent, HomeState> {
                               fit: BoxFit.scaleDown,
                               width: 18,
                               height: 25,
+                              color: colorSchema?.iconWhite,
                             ),
                           ),
                         ),
@@ -332,6 +337,8 @@ class HomePage extends BasePage<HomeBloc, HomeEvent, HomeState> {
                                           category: '',
                                           author: '',
                                           description: '',
+                                          numberOfComment: 0,
+                                          numberOfTym: 0,
                                         ),
                                       ],
                                 ),
@@ -352,6 +359,8 @@ class HomePage extends BasePage<HomeBloc, HomeEvent, HomeState> {
                                               category: '',
                                               author: '',
                                               description: '',
+                                              numberOfComment: 0,
+                                              numberOfTym: 0,
                                             ),
                                           ],
                                     ),

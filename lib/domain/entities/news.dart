@@ -12,6 +12,8 @@ class NewsItem {
   final String topic;
   final String author;
   final String description;
+  final int numberOfTym;
+  final int numberOfComment;
 
   NewsItem({
     required this.id,
@@ -23,10 +25,14 @@ class NewsItem {
     required this.category,
     required this.author,
     required this.description,
+    required this.numberOfComment,
+    required this.numberOfTym,
   });
 
   @override
   String toString() {
     return 'NewsItem{title: $title, source: $source, time: $timeAgo, imageUrl: $imageUrl, categories: $category}';
   }
+
+  copyWith({required int numberOfTym}) {}
 }

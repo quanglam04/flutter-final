@@ -52,7 +52,7 @@ class EditProfilePage
             Padding(
               padding: const EdgeInsets.only(right: 24),
               child: InkWell(
-                child: Assets.icons.ok.svg(),
+                child: Assets.icons.ok.svg(color: iconColor),
                 onTap: () {
                   final username = usernameController.text.trim();
                   final fullName = fullNameController.text.trim();
