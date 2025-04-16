@@ -29,6 +29,7 @@ class HomePage extends BasePage<HomeBloc, HomeEvent, HomeState> {
     final newsRepository = NewsRepositoryImpl();
     final textTheme = context.themeOwn().textTheme;
     final colorSchema = context.themeOwn().colorSchema;
+    final iconColor = Theme.of(context).iconTheme.color;
     return BlocBuilder<HomeBloc, HomeState>(
       buildWhen: (preState, state) => preState.listTopics != state.listTopics,
       builder: (context, state) {
@@ -106,13 +107,17 @@ class HomePage extends BasePage<HomeBloc, HomeEvent, HomeState> {
                                             left: 10,
                                             right: 10,
                                           ),
-                                          child: Assets.icons.search.svg(),
+                                          child: Assets.icons.search.svg(
+                                            color: iconColor,
+                                          ),
                                         ),
                                         suffixIcon: Padding(
                                           padding: const EdgeInsets.only(
                                             right: 12,
                                           ),
-                                          child: Assets.icons.frame.svg(),
+                                          child: Assets.icons.frame.svg(
+                                            color: iconColor,
+                                          ),
                                         ),
                                       ),
                                       onTap:

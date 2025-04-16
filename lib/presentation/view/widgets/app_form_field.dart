@@ -110,7 +110,9 @@ class _AppFormFieldState extends State<AppFormField> {
 
     final fillColor =
         widget.decoration?.errorText == null
-            ? Colors.transparent
+            ? (Theme.of(context).brightness == Brightness.light
+                ? Colors.transparent
+                : colorSchema?.darkmodeInputBackground)
             : colorSchema?.errorLight;
 
     return Column(

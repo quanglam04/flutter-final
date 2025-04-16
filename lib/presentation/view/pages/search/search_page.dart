@@ -28,6 +28,7 @@ class SearchPage extends BasePage<SearchBloc, SearchEvent, SearchState> {
   Widget builder(BuildContext context) {
     final textTheme = context.themeOwn().textTheme;
     final colorSchema = context.themeOwn().colorSchema;
+    final iconColor = Theme.of(context).iconTheme.color;
     return DefaultTabController(
       length: 3,
       child: SafeArea(
@@ -52,11 +53,13 @@ class SearchPage extends BasePage<SearchBloc, SearchEvent, SearchState> {
                                 left: 10,
                                 right: 10,
                               ),
-                              child: Assets.icons.search.svg(),
+                              child: Assets.icons.search.svg(color: iconColor),
                             ),
                             suffixIcon: InkWell(
                               onTap: () => context.pop(),
-                              child: Assets.icons.clearAll.svg(),
+                              child: Assets.icons.clearAll.svg(
+                                color: iconColor,
+                              ),
                             ),
                           ),
                           onChanged:

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_clean_architecture/shared/extension/context.dart';
 
 class Comment extends StatelessWidget {
   final String avatar;
@@ -22,6 +23,7 @@ class Comment extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorSchema = context.themeOwn().colorSchema;
     return Padding(
       padding: const EdgeInsets.only(bottom: 16, top: 10),
       child: Column(
@@ -91,7 +93,7 @@ class Comment extends StatelessWidget {
               padding: const EdgeInsets.only(left: 48, top: 10),
               child: Text(
                 'See more ($replyCount)',
-                style: const TextStyle(color: Colors.black, fontSize: 15),
+                style: TextStyle(color: colorSchema?.darkBlack, fontSize: 15),
               ),
             ),
         ],
