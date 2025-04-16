@@ -46,7 +46,7 @@ class CommentPage extends BasePage<CommentBloc, CommentEvent, CommentState> {
             Expanded(
               child: ListView(
                 padding: const EdgeInsets.symmetric(
-                  horizontal: 16,
+                  horizontal: 32,
                   vertical: 8,
                 ),
                 children: const [
@@ -62,7 +62,7 @@ class CommentPage extends BasePage<CommentBloc, CommentEvent, CommentState> {
                         avatar: 'assets/images/avt.jpg',
                         name: 'Madelyn Saris',
                         comment:
-                            'Lorem Ipsum is simply dummy text of the printing and type...',
+                            'Lorem Ipsum is simply dummy\n text of the printing and type...',
                         time: '4w',
                         likes: '3',
                       ),

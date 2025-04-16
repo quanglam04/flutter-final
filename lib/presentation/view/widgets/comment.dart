@@ -23,7 +23,7 @@ class Comment extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 16),
+      padding: const EdgeInsets.only(bottom: 16, top: 10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -38,10 +38,13 @@ class Comment extends StatelessWidget {
                   children: [
                     Text(
                       name,
-                      style: const TextStyle(fontWeight: FontWeight.bold),
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                      ),
                     ),
                     const SizedBox(height: 4),
-                    Text(comment),
+                    Text(comment, style: const TextStyle(fontSize: 15)),
                     const SizedBox(height: 6),
                     Row(
                       children: [
@@ -49,7 +52,7 @@ class Comment extends StatelessWidget {
                           time,
                           style: const TextStyle(
                             color: Colors.grey,
-                            fontSize: 12,
+                            fontSize: 13,
                           ),
                         ),
                         const SizedBox(width: 10),
@@ -63,13 +66,13 @@ class Comment extends StatelessWidget {
                           '$likes likes',
                           style: const TextStyle(
                             color: Colors.grey,
-                            fontSize: 12,
+                            fontSize: 13,
                           ),
                         ),
                         const SizedBox(width: 10),
                         const Text(
                           'reply',
-                          style: TextStyle(color: Colors.grey, fontSize: 12),
+                          style: TextStyle(color: Colors.grey, fontSize: 13),
                         ),
                       ],
                     ),
@@ -85,10 +88,10 @@ class Comment extends StatelessWidget {
             ),
           if (replyCount > 0)
             Padding(
-              padding: const EdgeInsets.only(left: 48, top: 4),
+              padding: const EdgeInsets.only(left: 48, top: 10),
               child: Text(
                 'See more ($replyCount)',
-                style: const TextStyle(color: Colors.black),
+                style: const TextStyle(color: Colors.black, fontSize: 15),
               ),
             ),
         ],

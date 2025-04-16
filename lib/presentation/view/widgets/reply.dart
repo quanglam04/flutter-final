@@ -21,7 +21,7 @@ class Reply extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        CircleAvatar(backgroundImage: AssetImage(avatar), radius: 14),
+        CircleAvatar(backgroundImage: AssetImage(avatar), radius: 20),
         const SizedBox(width: 8),
         Expanded(
           child: Column(
